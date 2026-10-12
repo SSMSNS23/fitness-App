@@ -1,5 +1,5 @@
 const PREFIX='training-log-static-'+self.registration.scope+'-';
-const CACHE=PREFIX+'v0.2.0';
+const CACHE=PREFIX+'v0.2.1';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./store.js','./model.js','./starter.js','./manifest.webmanifest','./icon.svg','./apple-touch-icon.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('message',event=>{if(event.data?.type==='ACTIVATE')self.skipWaiting();});
