@@ -1,7 +1,7 @@
 # Verification — 12 October 2026
 
 Live app: https://ssmsns23.github.io/fitness-App/
-Repository: SSMSNS23/fitness-App. Pages uses main/root with HTTPS enforced. App version v0.2.2.
+Repository: SSMSNS23/fitness-App. Pages uses main/root with HTTPS enforced. App version v0.2.3.
 
 ## Automated checks
 
@@ -24,7 +24,7 @@ Run `node --test tests/model.test.mjs` from the repository root. JavaScript synt
 - Malformed backup was rejected without changing records; valid empty backup restore returned the test browser to a clean programme and zero workouts.
 - Changed 2-hour inactivity preference persisted after refresh.
 - Exported JSON backup was parsed locally: actual current test set (22.5 kg × 10), prior history and settings were preserved.
-- Updated v0.2.2 loaded. Service-worker installs revalidate shell assets to avoid stale HTTP-cached code/styles.
+- Updated v0.2.3 loaded. Service-worker installs revalidate shell assets to avoid stale HTTP-cached code/styles.
 - No application-origin errors appeared in the checked console log window.
 
 All browser records were disposable synthetic test data on the agent's browser. No personal logs, backups, credentials or private planning documents were published.
