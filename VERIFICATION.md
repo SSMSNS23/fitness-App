@@ -1,33 +1,42 @@
 # Verification — 12 October 2026
 
-## Completed
+Live app: https://ssmsns23.github.io/fitness-App/
+Repository: SSMSNS23/fitness-App. Pages uses main/root with HTTPS enforced. App version v0.2.2.
 
-- JavaScript syntax checks: `app.js`, `store.js`, `model.js`, `starter.js`, `sw.js`.
-- 21 automated Node model checks pass: empty history; four sessions; start snapshot; duplicate start guard; decimal and rep serialisation; third-set logging without automatic completion; correction and undo; out-of-order logging; invalid values; partial completion and finalisation identity; manual duration; 12h boundary and automatic duration; stale expired interactions; 2h setting; deliberate session skip/wrap; immutable history under programme edits; prefill from actual logged sets; stable exercise identity; no first-workout fabricated PR; PR recalculation after correction; v1 migration; invalid backup validation; kg/lb arithmetic.
-- Source inspection: original storage uses one synchronous localStorage write without error handling, prompt-based editing and fragile full rerenders on input change. The revised source separates storage/model/UI, saves input without replacing focused controls, uses an explicit summary and editor, preserves snapshots, and checks transaction completion before showing saved state.
-- Static asset references and service-worker asset list checked against the package.
+## Automated checks
 
-## Not completed — do not interpret logic tests as browser tests
+21 Node model checks pass, covering the four-session cycle, empty history, immutable snapshots, decimals, out-of-order logging, correction/undo, partial and duplicate finishes, inactivity boundaries/durations, actual previous-set prefilling, honest highest-load records, migration, backup validation and unit arithmetic.
 
-The managed preview process failed before startup: `bwrap: Can't mount proc on /newroot/proc: Operation not permitted`. The environment also did not provide a working local browser binary; the attempted browser download did not yield a valid archive. No browser session, screenshot, Safari engine test or real iPhone test was completed.
+Run `node --test tests/model.test.mjs` from the repository root. JavaScript syntax and static asset/module references were checked.
 
-GitHub account identity was confirmed as SSMSNS23. The connection returned no accessible repositories and does not provide repository creation or Pages activation. No repository was changed and no live deployment URL was verified.
+## Chrome browser workflows verified
 
-## Required next checks after publication
+- Live app loaded with four labelled example sessions and empty actual history.
+- Typed 31.25 kg and 9 reps; clicked Log Set directly; logged three sets without collapsing or automatically advancing the exercise.
+- Running workout and set values survived refresh.
+- Weight increase, correction, undo and deliberate out-of-order exercise switching worked.
+- Settings navigation, Resume and kg/lb switching preserved stored workout values.
+- Partial finish gave accurate count/duration and returned to the next session through Done.
+- Programme rename, reorder, add/remove and Save Workout worked; historical snapshots remained unchanged.
+- Save Correction updated a historical value; the next session prefilled that actual value and showed separately recorded prior sets.
+- Simultaneous End Workout clicks from two tabs produced one history record and one cycle advance.
+- Disposable expired-session fixture auto-finished once, saving one logged set and a 30-minute duration through lastActivity. Reload did not duplicate it.
+- Malformed backup was rejected without changing records; valid empty backup restore returned the test browser to a clean programme and zero workouts.
+- Changed 2-hour inactivity preference persisted after refresh.
+- Exported JSON backup was parsed locally: actual current test set (22.5 kg × 10), prior history and settings were preserved.
+- Updated v0.2.2 loaded. Service-worker installs revalidate shell assets to avoid stale HTTP-cached code/styles.
+- No application-origin errors appeared in the checked console log window.
 
-1. Open the actual Pages URL. Confirm empty history and clearly labelled example programme.
-2. Check at 320, 375, 390 and 430px viewport widths and in iPhone Safari. Verify legible controls, no horizontal scroll and safe-area clearance.
-3. Edit/add/remove/reorder an exercise; cancel and save; reload and confirm the saved programme.
-4. Start; type 31.25kg and 9 reps; tap Log Set directly from the number keyboard; log three sets. Confirm the same exercise remains open.
-5. Expand another exercise and log out of order; correct and undo a set; reload; background and reopen. Confirm actual set values and running workout persist.
-6. Navigate Settings/History and use Resume. Confirm one running workout, kg/lb conversion and increments, Follow Device/Light/Dark.
-7. Finish partially; confirm exact logged count/duration, Done returning to next session and history showing unlogged sets honestly. Edit template afterwards and confirm past records stay unchanged.
-8. Start another workout containing the same exercise; confirm actual previous-set prefill and separate previous-session tiles.
-9. In two same-origin tabs, finish the same running workout nearly simultaneously. Confirm one history record and one cycle advance. Check independent set changes are preserved.
-10. Move lastActivity behind the configured inactivity threshold in a test-only database; reload and reopen both tabs. Confirm one auto-finished record, duration through lastActivity, no fabricated completed sets and no extra finalisation.
-11. Verify service-worker install; go offline; reload and log a set; reconnect. Deploy a bumped shell version and confirm old active workouts survive the update.
-12. Simulate unavailable storage/transaction failure; confirm no success claim, prior saved data survives, and retry/recovery is usable.
-13. Export/restore a test backup; reject a malformed backup without changing current data.
-14. Add to Home Screen on the actual iPhone, log a disposable test session, close/reopen the app and confirm storage. Complete this check before entering the real programme.
+All browser records were disposable synthetic test data on the agent's browser. No personal logs, backups, credentials or private planning documents were published.
 
-Only isolated synthetic test fixtures should be used for expiry, failure and correction tests. Do not write test fixtures into the user's real records or public repository as personal history.
+## Phone layout verified
+
+The live app was rendered at 320, 375, 390 and 430px iframe widths. Numeric controls stayed within their rows, without horizontal document overflow. Buttons measure 48–52px. Mobile-width logging and refresh preserved saved values.
+
+Browser QA found and fixed invisible light-mode +/− symbols and overflowing control rows. Phone controls now use their full available width.
+
+## Remaining verification limits
+
+These are Chrome checks, not a real iPhone or Safari-engine test. Safari keyboard behaviour, safe-area insets, Add to Home Screen, reopening after phone lock and airplane-mode offline reload still need the actual device. Storage eviction/quota failure has not been simulated in-browser.
+
+Local saving is not cloud backup. Clearing website data, removing the installed app, changing devices or losing the phone may remove records. Export a backup periodically and keep using the same Home Screen app/browser context.
