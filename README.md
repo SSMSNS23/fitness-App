@@ -1,5 +1,7 @@
 # Personal Training Log — Milestone 1
 
+Live app: https://ssmsns23.github.io/fitness-App/
+
 A buildless iPhone-first personal workout tracker. No accounts, external APIs, subscriptions or cloud storage.
 
 ## Included
@@ -27,7 +29,7 @@ The supplied sessions and loads are examples. The exact personal programme still
 2. Allow the connected GitHub app to access that repository if repository selection is restricted.
 3. Upload the files **inside this training-log folder** to the repository root, including `.nojekyll`. Do not upload the outer ZIP as the website, test fixtures, backups or planning documents.
 4. Repository Settings → Pages → Source: **Deploy from a branch** → Branch: **main** → Folder: **/(root)** → Save.
-5. Wait for the GitHub Pages deployment to succeed. Use the **Visit site** URL provided in Pages settings. No live URL has been verified as part of this package.
+5. Wait for the GitHub Pages deployment to succeed. Use the **Visit site** URL provided in Pages settings. The live URL above was verified on 12 October 2026.
 6. Run the browser checks listed in `VERIFICATION.md` before treating the app as ready for real workout data.
 
 No build step is required. Keep all application files in the same directory. Relative asset and manifest paths support the GitHub Pages repository subpath.
@@ -36,7 +38,7 @@ No build step is required. Keep all application files in the same directory. Rel
 
 Open the verified URL in **Safari** → Share → **Add to Home Screen** → Add. Launch the Home Screen app, edit the example sessions and start a workout. Keep logging in the same Home Screen app; Safari and installed-app storage behaviour can differ. If moving between contexts, export/import a backup instead of assuming records have transferred.
 
-After the first successful online load, the installed service worker caches the app shell for offline use. Its runtime behaviour still needs browser verification. Updates wait until the app is reopened without an active workout. Bump the version in `sw.js` when changing the deployed app shell.
+After the first successful online load, the installed service worker caches the app shell for offline use. App updates have been verified in Chrome; offline reload in iPhone airplane mode remains to be checked. Updates wait until the app is reopened without an active workout. Bump the version in `sw.js` when changing the deployed app shell.
 
 ## Storage limitations
 
@@ -46,12 +48,12 @@ Local saving is not cloud backup. Clearing website data, deleting the Home Scree
 
 `app.js`: UI and interactions. `model.js`: workout operations. `store.js`: validation, migration and transaction queue. `styles.css`: mobile styling. `sw.js`: offline shell. `starter.js`: example programme.
 
-With a recent Node.js version, run the package's tests from the outer folder:
+With a recent Node.js version, run the tests from the repository root:
 
     node --test tests/model.test.mjs
 
-21 logic checks pass. Real-browser, real IndexedDB, offline, mobile layout and iPhone Home Screen verification are pending because the build environment's preview service could not start. See `VERIFICATION.md`.
+21 logic checks pass. Chrome browser workflows, actual IndexedDB persistence, concurrent finalisation and mobile layouts have also been verified. Real iPhone Safari/Home Screen and airplane-mode use remain to be checked. See `VERIFICATION.md`.
 
 ## Deferred
 
-Nutrition, Weight, Heavy/Mid/Light rotations, rest timer, supersets/giant sets, drag handles, exercise-library discovery, full progress analytics, temporary workout changes, accounts and cloud sync. The original full specification is preserved separately in the outer package's planning folder.
+Nutrition, Weight, Heavy/Mid/Light rotations, rest timer, supersets/giant sets, drag handles, exercise-library discovery, full progress analytics, temporary workout changes, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
