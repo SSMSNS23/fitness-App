@@ -1,4 +1,13 @@
-# Personal Training Log — Milestone 1
+# Personal Training Log
+
+## Flexible programme v0.4.0
+
+Use any number of active sessions (1–50). Add sessions from Programme, rename in Edit, or pause/enable sessions without deleting their workout history. Heavy/Mid/Light phases each use two complete rotations of the active sessions. A three-session programme therefore completes a phase in six workouts.
+
+Settings → Import programme file accepts a programme-only JSON document. It changes future session templates, preserves every historical snapshot, and starts a fresh rotation in the current phase. Active workouts must be finished first. Different per-set starting weights/reps are supported by imported templates. Missing screenshot values remain blank on the logging screen until entered; provisional set counts remain editable.
+
+37 automated model checks pass. Personal programme imports and workout logs remain private local data; they must never be committed to this public repository. Superset metadata may be retained in imports, but grouped exercise/rest behaviour is not implemented yet.
+
 
 ## Training refinement v0.3.0
 
@@ -60,8 +69,8 @@ With a recent Node.js version, run the tests from the repository root:
 
     node --test tests/model.test.mjs
 
-21 logic checks pass. Chrome browser workflows, actual IndexedDB persistence, concurrent finalisation and mobile layouts have also been verified. Real iPhone Safari/Home Screen and airplane-mode use remain to be checked. See `VERIFICATION.md`.
+37 logic checks pass. Chrome browser workflows, actual IndexedDB persistence, concurrent finalisation and mobile layouts have also been verified. Real iPhone Safari/Home Screen and airplane-mode use remain to be checked. See `VERIFICATION.md`.
 
 ## Deferred
 
-Nutrition, Weight, Heavy/Mid/Light rotations, rest timer, supersets/giant sets, drag handles, exercise-library discovery, full progress analytics, temporary workout changes, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
+Nutrition, Weight, rest timer, supersets/giant sets, drag handles, exercise-library discovery, full progress analytics, temporary workout changes, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.

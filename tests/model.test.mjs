@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {defaults,validate,migrate,clone} from '../store.js';
-import {startSession,finishSession,updateSet,isExpired,previousSet,highestLoadRecords,cycle} from '../model.js';
+import {startSession,finishSession,updateSet,isExpired,previousSet,highestLoadRecords,cycle,toggleSession,importProgramme} from '../model.js';
 const T=1700000000000;
 const active=()=>{const s=defaults();startSession(s,0,T,'one');return s;};
 test('four sessions and empty actual history',()=>{const s=defaults();assert.deepEqual(s.templates.map(t=>t.name),['Upper A','Lower A','Upper B','Lower B']);assert.equal(s.history.length,0);assert.equal(s.settings.theme,'system');validate(s);});
@@ -34,3 +34,10 @@ test('rest timer starts on logging and survives serialisation',()=>{const s=acti
 test('rest timer undo restores previous logged-set timestamp',()=>{const s=active();updateSet(s,'one',0,0,'done',true,T+1000);updateSet(s,'one',1,0,'done',true,T+2000);updateSet(s,'one',1,0,'done',false,T+3000);assert.equal(s.active.restStarted,T+1000);updateSet(s,'one',0,0,'done',false,T+4000);assert.equal(s.active.restStarted,null);});
 test('duplicate log requests do not restart the rest timer',()=>{const s=active();updateSet(s,'one',0,0,'done',true,T+1000);updateSet(s,'one',0,0,'done',true,T+2000);assert.equal(s.active.restStarted,T+1000);});
 test('new preferences and cycle validation reject malformed backups',()=>{const s=defaults();for(const p of [{step:6,completed:[]},{step:0,completed:[1,1]},{step:0,completed:[4]}])assert.throws(()=>validate({...clone(s),programme:p}));assert.throws(()=>validate({...clone(s),settings:{...s.settings,restTimer:'yes'}}));});
+test('three sessions complete two rotations in six workouts',()=>{const s=defaults();s.templates.splice(3,1);for(let n=0;n<6;n++){startSession(s,s.next,T+n*1000,'three-'+n);finishSession(s,'three-'+n,T+n*1000+1);validate(s);}assert.equal(cycle(s).phase,'Mid');assert.equal(cycle(s).rotation,1);});
+test('arbitrary session names and fifth session remain valid',()=>{const s=defaults();s.templates[0].name='My first session';s.templates.push({...clone(s.templates[0]),id:'fifth',name:'Extra'});s.next=4;validate(s);startSession(s,4,T,'fifth-run');assert.equal(s.active.name,'Extra');finishSession(s,'fifth-run',T+1000);assert.equal(cycle(s).count,5);});
+test('pausing sessions is reversible and cannot disable the last one',()=>{const s=defaults();for(const i of [1,2,3])toggleSession(s,i);assert.equal(cycle(s).count,1);assert.throws(()=>toggleSession(s,0));toggleSession(s,2);assert.equal(cycle(s).count,2);});
+test('a running session cannot be paused',()=>{const s=active();assert.throws(()=>toggleSession(s,0));assert.equal(cycle(s).count,4);});
+test('programme import preserves every historical record including old session indices',()=>{const s=defaults();startSession(s,3,T,'old-fourth');finishSession(s,'old-fourth',T+1000);const before=JSON.stringify(s.history);importProgramme(s,{format:'training-log-programme',version:1,sessions:clone(s.templates.slice(0,3))});assert.equal(s.templates.length,3);assert.equal(JSON.stringify(s.history),before);validate(s);});
+test('programme import refuses to replace a running workout',()=>{const s=active();assert.throws(()=>importProgramme(s,{format:'training-log-programme',version:1,sessions:clone(s.templates.slice(0,3))}));assert.equal(s.active.id,'one');});
+test('different per-set starting values are honoured',()=>{const s=defaults();s.templates[0].exercises[0].presets=[{weight:20,reps:10},{weight:15,reps:8},{weight:10,reps:7}];startSession(s,0,T,'presets');assert.equal(s.active.exercises[0].sets[1].weight,15);assert.equal(s.active.exercises[0].sets[1].reps,8);});
