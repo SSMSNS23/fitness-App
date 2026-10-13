@@ -1,7 +1,8 @@
 import {starter} from './starter.js';
-export const KEY='personal-training-log-v1';
+export const SANDBOX=typeof location!=='undefined'&&new URLSearchParams(location.search).get('sandbox')==='true';
+export const KEY='personal-training-log-v1'+(SANDBOX?'-qa':'');
 export const clone=x=>structuredClone(x);
-export const defaults=()=>({version:2,revision:0,templates:clone(starter).map((t,i)=>({...t,id:`session-${i}`,example:true,exercises:t.exercises.map((e,j)=>({...e,id:`starter-${i}-${j}`}))})),history:[],active:null,next:0,settings:{theme:'system',unit:'kg',increment:2.5,inactivityHours:12,overrides:{}}});
+export const defaults=()=>({version:2,revision:0,templates:clone(starter).map((t,i)=>({...t,id:`session-${i}`,example:true,exercises:t.exercises.map((e,j)=>({...e,id:`starter-${i}-${j}`}))})),history:[],active:null,next:0,programme:{step:0,completed:[]},settings:{theme:'system',unit:'kg',increment:2.5,inactivityHours:12,restTimer:true,overrides:{}}});
 function number(n,min=0){return typeof n==='number'&&Number.isFinite(n)&&n>=min}
 export function validate(s){
  if(!s||![1,2].includes(s.version)||!Array.isArray(s.templates)||s.templates.length!==4||!Array.isArray(s.history)||!Number.isInteger(s.next)||s.next<0||s.next>3||!s.settings)throw Error('Unrecognised training data');
@@ -12,12 +13,16 @@ export function validate(s){
  if(s.history.some(w=>!number(w.ended)||w.ended<w.started)||new Set(records.map(w=>w.id)).size!==records.length)throw Error('Invalid workout dates or duplicate records');
  if(s.settings.overrides&& (typeof s.settings.overrides!=='object'||Object.values(s.settings.overrides).some(v=>!number(v,.01))))throw Error('Invalid exercise increments');
  if(records.some(w=>w.exercises.some(e=>e.increment!==undefined&&!number(e.increment,.01)))||s.templates.some(t=>t.exercises.some(e=>e.increment!==undefined&&!number(e.increment,.01))))throw Error('Invalid weight step');
+ if(s.programme&&(!Number.isInteger(s.programme.step)||s.programme.step<0||s.programme.step>5||!Array.isArray(s.programme.completed)||s.programme.completed.length>3||s.programme.completed.some(i=>!Number.isInteger(i)||i<0||i>3)||new Set(s.programme.completed).size!==s.programme.completed.length))throw Error('Invalid programme rotation');
+ if(records.some(w=>w.phase!=null&&!['Heavy','Mid','Light'].includes(w.phase)))throw Error('Invalid workout phase');
+ if(records.some(w=>w.restStarted!=null&&!number(w.restStarted)))throw Error('Invalid rest timer');
+ if(s.settings.restTimer!==undefined&&typeof s.settings.restTimer!=='boolean')throw Error('Invalid timer preference');
  return s;
 }
-export function migrate(raw){const s=validate(raw);if(s.version===1){s.version=2;s.revision=0;s.templates.forEach((t,i)=>{t.id=`session-${i}`;t.exercises.forEach((e,j)=>{e.id=`migrated-${i}-${j}`;if(Object.hasOwn(s.settings.overrides??{},e.name))e.increment=s.settings.overrides[e.name];})});}s.settings.overrides??={};return s;}
+export function migrate(raw){const s=validate(raw);if(s.version===1){s.version=2;s.revision=0;s.templates.forEach((t,i)=>{t.id=`session-${i}`;t.exercises.forEach((e,j)=>{e.id=`migrated-${i}-${j}`;if(Object.hasOwn(s.settings.overrides??{},e.name))e.increment=s.settings.overrides[e.name];})});}s.settings.overrides??={};s.settings.restTimer??=true;s.programme??={step:0,completed:[]};return s;}
 let db,queue=Promise.resolve();
 export async function open(){
- db=await new Promise((resolve,reject)=>{const r=indexedDB.open('personal-training-log',1);r.onupgradeneeded=()=>r.result.createObjectStore('state');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Close other Training Log tabs and try again'));});
+ db=await new Promise((resolve,reject)=>{const r=indexedDB.open('personal-training-log'+(SANDBOX?'-qa':''),1);r.onupgradeneeded=()=>r.result.createObjectStore('state');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Close other Training Log tabs and try again'));});
  db.onversionchange=()=>db.close();
  return transaction(s=>s);
 }

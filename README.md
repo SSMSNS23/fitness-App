@@ -1,5 +1,13 @@
 # Personal Training Log — Milestone 1
 
+## Training refinement v0.3.0
+
+Heavy → Mid → Light, with two full four-session rotations per phase. Completing a different session first retains unfinished sessions; repeats do not falsely finish a rotation. Earlier history keeps its original unphased status. New sessions prefill actual values from their own phase; no matching record means editable template defaults, not inferred lighter/heavier loads.
+
+Previous-session Heavy/Mid/Light/Earlier reference tabs do not overwrite current entries. History has phase filters. A non-blocking count-up rest timer starts on a logged set, survives reload/backgrounding, and can be reset or disabled in Settings. No automatic exercise advance.
+
+An explicitly labelled `?sandbox=true` testing mode uses separate local databases, legacy keys and cross-tab channels. Never log real workouts in that mode. Thirty model tests pass; live browser checks for this release are recorded in VERIFICATION.md.
+
 Live app: https://ssmsns23.github.io/fitness-App/
 
 A buildless iPhone-first personal workout tracker. No accounts, external APIs, subscriptions or cloud storage.
