@@ -54,6 +54,23 @@ body.light .setcard.done>.row:first-child>strong{color:#176247}
 .recap-set>span{flex-shrink:0;font-size:12px}
 .recap-set strong{min-width:0;text-align:right;font-size:16px;line-height:1.5;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .recap-set strong span{font-size:12px;font-weight:500}
+/* A shared set / load / reps layout for reviews, records and comparisons. */
+.set-table{width:100%;table-layout:fixed;border-collapse:collapse;margin:12px 0 18px;font-size:14px;font-variant-numeric:tabular-nums}
+.set-table .set-column{width:36%}
+.set-table .value-column{width:32%}
+.set-table th,.set-table td{padding:12px 8px;border-bottom:1px solid var(--border);text-align:right;overflow-wrap:anywhere}
+.set-table th:first-child{padding-left:0;text-align:left}
+.set-table th:last-child,.set-table td:last-child{padding-right:0}
+.set-table thead th{font-size:12px;font-weight:650;color:var(--muted)}
+.set-table tbody th{font-size:13px;font-weight:600}
+.set-table td{font-size:17px;font-weight:750}
+.set-table .unlogged-row{color:var(--muted)}
+.set-status{display:block;font-size:11px;font-weight:500;margin-top:4px;color:var(--muted)}
+.unlogged-notice{font-size:14px;line-height:1.6;border-left:3px solid var(--gold);padding:10px 12px;background:var(--card2);border-radius:0 8px 8px 0}
+.finish-actions{display:grid;gap:12px;margin-top:18px}
+.finish-actions>.ghost{min-height:52px;white-space:normal;line-height:1.5}
+.review-heading{font-size:17px;margin-top:24px}
+.exercise-visibility{margin:16px 0}
 /* Keep the workout action close; expand the programme preview on demand. */
 .programme-preview{margin:16px 0;border-top:1px solid var(--border)}
 .programme-preview summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:12px 0;cursor:pointer;list-style:none;font-size:14px;font-weight:700;color:var(--text)}
