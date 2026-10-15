@@ -7,7 +7,9 @@
 - An isolated runtime check of the actual finish handler confirms that incomplete workouts remain active until acknowledged, an acknowledgement for another workout cannot finish the current workout, explicit acknowledgement preserves recorded set values, and fully logged workouts finish directly.
 - Result-table checks confirm Set / kg / Reps columns, original set numbering, and explicit Not logged rows with dashes instead of template values.
 - Exercise panels now use an independent set of open panel IDs, with Expand all and Collapse all controls.
-- Live browser workflow verification is pending GitHub Pages deployment; the initial deployment failed because its API connection closed, and the failed-job retry remained queued.
+- Live browser checks pass: four exercise panels remained open; collapsing one left the other three open; returning from finish review preserved all four panels and recorded weight/reps; explicit acknowledgement saved all ten unlogged rows; a fully logged nine-set workout finished directly without review.
+- Result columns align across exercises at phone widths, and the 320 px finish review has no horizontal overflow.
+- GitHub Pages deployed v0.5.0 successfully after an initial API connection failure.
 
 ## Earlier verification — 12 October 2026
 
