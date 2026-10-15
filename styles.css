@@ -23,6 +23,7 @@ body.light .qty button{color:var(--text)}
 .exercise>.exhead:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:18px}
 .exercise-status{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .exercise-status .badge{white-space:nowrap}
+.exercise-log{font-size:12px;line-height:1.6;font-weight:500;color:var(--text);overflow-wrap:anywhere}
 .exercise.complete{border-color:var(--green)}
 .exercise.complete>.exhead{background:var(--green2)}
 /* Make the current set readable at a glance and distinguish Undo from Log. */
