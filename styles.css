@@ -14,5 +14,12 @@ body.light .qty button{color:var(--text)}
 .workout-option>.exhead{flex:1;min-width:0}
 .workout-option .stack{min-width:0;overflow-wrap:anywhere}
 .hero-title{overflow-wrap:anywhere}
+/* Clear, stable exercise headers even when a name wraps across lines. */
+.exercise>.exhead{min-height:82px;padding:17px 16px;gap:14px}
+.exercise>.exhead>.stack{flex:1;min-width:0;gap:7px;overflow-wrap:anywhere}
+.exercise>.exhead strong{font-size:17px;line-height:1.4}
+.exercise>.exhead>span[aria-hidden="true"]{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:50%;background:var(--card2);line-height:1}
+.exercise>.exhead[aria-expanded="true"]>span[aria-hidden="true"]{border-color:var(--gold)}
+.exercise>.exhead:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:18px}
 .field input[type="checkbox"]{width:20px;height:20px;padding:0;vertical-align:middle;margin-right:8px;accent-color:var(--green)}
 .phase-label{font-size:12px;color:var(--gold);margin:12px 0;line-height:1.6}.phase-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin:12px 0 18px}.phase-steps span{font-size:11px;text-align:center;color:var(--muted);padding-top:9px;border-top:4px solid var(--border)}.phase-steps .current{color:var(--gold);border-color:var(--gold)}.comparison-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}.comparison-tabs button{flex:1;font-size:12px;padding:8px;min-height:44px}.rest-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--border);padding:10px 14px;border-radius:12px;margin:12px 0;color:var(--muted)}.rest-bar strong{font-variant-numeric:tabular-nums;color:var(--text);margin-left:9px;font-size:19px}
