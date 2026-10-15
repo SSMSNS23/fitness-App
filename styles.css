@@ -42,5 +42,18 @@ body.light .setcard.done>.row:first-child>strong{color:#176247}
 .history-metrics{display:flex;flex-wrap:wrap;gap:10px 18px;color:var(--muted);font-size:12px;line-height:1.5}
 .history-metrics strong{font-size:15px;font-variant-numeric:tabular-nums;color:var(--text);margin-right:3px}
 .history-chevron{flex:0 0 20px;text-align:center;font-size:28px;color:var(--gold)}
+/* Keep the workout action close; expand the programme preview on demand. */
+.programme-preview{margin:16px 0;border-top:1px solid var(--border)}
+.programme-preview summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:12px 0;cursor:pointer;list-style:none;font-size:14px;font-weight:700;color:var(--text)}
+.programme-preview summary::-webkit-details-marker{display:none}
+.programme-preview summary::after{content:'+';flex:0 0 24px;text-align:center;color:var(--gold);font-size:23px;line-height:1}
+.programme-preview[open] summary::after{content:'−'}
+.programme-preview summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.programme-preview ol{margin:0;padding:0 0 0 22px;font-size:13px;line-height:1.5}
+.programme-preview li{padding:10px 0;border-top:1px solid var(--border)}
+.programme-preview li::marker{color:var(--muted)}
+.preview-exercise{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.preview-exercise>span:first-child{min-width:0;overflow-wrap:anywhere}
+.preview-exercise>span:last-child{flex-shrink:0;white-space:nowrap}
 .field input[type="checkbox"]{width:20px;height:20px;padding:0;vertical-align:middle;margin-right:8px;accent-color:var(--green)}
 .phase-label{font-size:12px;color:var(--gold);margin:12px 0;line-height:1.6}.phase-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin:12px 0 18px}.phase-steps span{font-size:11px;text-align:center;color:var(--muted);padding-top:9px;border-top:4px solid var(--border)}.phase-steps .current{color:var(--gold);border-color:var(--gold)}.comparison-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}.comparison-tabs button{flex:1;font-size:12px;padding:8px;min-height:44px}.rest-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--border);padding:10px 14px;border-radius:12px;margin:12px 0;color:var(--muted)}.rest-bar strong{font-variant-numeric:tabular-nums;color:var(--text);margin-left:9px;font-size:19px}
