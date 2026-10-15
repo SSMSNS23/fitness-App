@@ -1,4 +1,15 @@
-# Verification — 12 October 2026
+# Verification — 16 October 2026
+
+## v0.5.0 workout review and result columns
+
+- All 37 model checks pass with `node --test tests/model.test.mjs`.
+- JavaScript syntax checks pass for app.js and sw.js.
+- An isolated runtime check of the actual finish handler confirms that incomplete workouts remain active until acknowledged, an acknowledgement for another workout cannot finish the current workout, explicit acknowledgement preserves recorded set values, and fully logged workouts finish directly.
+- Result-table checks confirm Set / kg / Reps columns, original set numbering, and explicit Not logged rows with dashes instead of template values.
+- Exercise panels now use an independent set of open panel IDs, with Expand all and Collapse all controls.
+- Live browser workflow verification is pending GitHub Pages deployment; the initial deployment failed because its API connection closed, and the failed-job retry remained queued.
+
+## Earlier verification — 12 October 2026
 
 Live app: https://ssmsns23.github.io/fitness-App/
 Repository: SSMSNS23/fitness-App. Pages uses main/root with HTTPS enforced. App version v0.2.3.
