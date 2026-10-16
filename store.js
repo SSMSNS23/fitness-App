@@ -5,20 +5,25 @@ export const clone=x=>structuredClone(x);
 export const defaults=()=>({version:2,revision:0,templates:clone(starter).map((t,i)=>({...t,id:`session-${i}`,example:true,exercises:t.exercises.map((e,j)=>({...e,id:`starter-${i}-${j}`}))})),history:[],active:null,next:0,programme:{step:0,completed:[]},settings:{theme:'system',unit:'kg',increment:2.5,inactivityHours:12,restTimer:true,overrides:{}}});
 function number(n,min=0){return typeof n==='number'&&Number.isFinite(n)&&n>=min}
 export function validate(s){
+ const ranges=['Heavy','Mid','Light'],plan=s?.programme;
+ if(plan?.rangeOrder!==undefined&&(!Array.isArray(plan.rangeOrder)||plan.rangeOrder.length!==3||new Set(plan.rangeOrder).size!==3||plan.rangeOrder.some(p=>!ranges.includes(p))))throw Error('Invalid range order');
+ if(plan?.rangeRounds!==undefined&&(!plan.rangeRounds||typeof plan.rangeRounds!=='object'||Array.isArray(plan.rangeRounds)||Object.keys(plan.rangeRounds).length!==3||ranges.some(p=>![1,2].includes(plan.rangeRounds[p]))))throw Error('Choose one or two rounds for each range');
+ const rangeSteps=plan?.rangeRounds?ranges.reduce((n,p)=>n+plan.rangeRounds[p],0):6;
+ if(plan?.blockUndo!==undefined&&(!plan.blockUndo||typeof plan.blockUndo!=='object'||typeof plan.blockUndo.guard!=='string'||!plan.blockUndo.programme||!Array.isArray(plan.blockUndo.phases)||!Number.isInteger(plan.blockUndo.next)))throw Error('Invalid block undo');
  if(s?.templates?.some(t=>t.deleted!==undefined&&(typeof t.deleted!=='boolean'||t.deleted&&t.enabled!==false)))throw Error('Invalid deleted session');
- if(s?.programme?.mode!==undefined&&!['auto','manual'].includes(s.programme.mode))throw Error('Invalid programme mode');
+ if(s?.programme?.mode!==undefined&&!['auto','manual'].includes(s.programme.mode))throw Error('Invalid program mode');
  if(s?.templates?.some(t=>t.phase!==undefined&&t.phase!==null&&!['Heavy','Mid','Light'].includes(t.phase)))throw Error('Invalid session tag');
  if(!s||![1,2].includes(s.version)||!Array.isArray(s.templates)||(s.templates.length<1||s.templates.filter(t=>!t.deleted).length>50||!s.templates.some(t=>!t.deleted&&t.enabled!==false))||!Array.isArray(s.history)||!Number.isInteger(s.next)||s.next<0||s.next>=s.templates.length||!s.settings)throw Error('Unrecognised training data');
  if(s.programme?.order!==undefined&&(!Array.isArray(s.programme.order)||s.programme.order.length>s.templates.length||new Set(s.programme.order).size!==s.programme.order.length||s.programme.order.some(i=>!Number.isInteger(i)||i<0||i>=s.templates.length)))throw Error('Invalid session order');
  if(!['system','light','dark'].includes(s.settings.theme)||!['kg','lb'].includes(s.settings.unit)||!number(s.settings.increment,.01)||!number(s.settings.inactivityHours,2)||s.settings.inactivityHours>24)throw Error('Invalid preferences');
- if(s.templates.some(t=>typeof t.name!=='string'||!t.name.trim()||!Array.isArray(t.exercises)||t.exercises.some(e=>typeof e.name!=='string'||!e.name.trim()||!Number.isInteger(e.sets)||e.sets<1||e.sets>12||!Number.isInteger(e.reps)||!number(e.reps)||!number(e.weight))))throw Error('Invalid programme');
+ if(s.templates.some(t=>typeof t.name!=='string'||!t.name.trim()||!Array.isArray(t.exercises)||t.exercises.some(e=>typeof e.name!=='string'||!e.name.trim()||!Number.isInteger(e.sets)||e.sets<1||e.sets>12||!Number.isInteger(e.reps)||!number(e.reps)||!number(e.weight))))throw Error('Invalid program');
  const records=[...s.history,...(s.active?[s.active]:[])];
  if([...s.templates,...records].some(w=>w.exercises?.some(e=>e.group!=null&&(typeof e.group!=='string'||e.group.length>200))))throw Error('Invalid exercise group');
  if(records.some(w=>typeof w.id!=='string'||typeof w.name!=='string'||!number(w.started)||!number(w.lastActivity)||!Number.isInteger(w.templateIndex)||w.templateIndex<0||!Array.isArray(w.exercises)||w.exercises.some(e=>typeof e.name!=='string'||!Array.isArray(e.sets)||e.sets.some(z=>!number(z.weight)||!Number.isInteger(z.reps)||!number(z.reps)||typeof z.done!=='boolean'))))throw Error('Invalid workout records');
  if(s.history.some(w=>!number(w.ended)||w.ended<w.started)||new Set(records.map(w=>w.id)).size!==records.length)throw Error('Invalid workout dates or duplicate records');
  if(s.settings.overrides&& (typeof s.settings.overrides!=='object'||Object.values(s.settings.overrides).some(v=>!number(v,.01))))throw Error('Invalid exercise increments');
  if(records.some(w=>w.exercises.some(e=>e.increment!==undefined&&!number(e.increment,.01)))||s.templates.some(t=>t.exercises.some(e=>e.increment!==undefined&&!number(e.increment,.01))))throw Error('Invalid weight step');
- if(s.programme&&(!Number.isInteger(s.programme.step)||s.programme.step<0||s.programme.step>5||!Array.isArray(s.programme.completed)||s.programme.completed.length>s.templates.length||s.programme.completed.some(i=>!Number.isInteger(i)||i<0||i>=s.templates.length)||new Set(s.programme.completed).size!==s.programme.completed.length))throw Error('Invalid programme rotation');
+ if(s.programme&&(!Number.isInteger(s.programme.step)||s.programme.step<0||s.programme.step>=rangeSteps||!Array.isArray(s.programme.completed)||s.programme.completed.length>s.templates.length||s.programme.completed.some(i=>!Number.isInteger(i)||i<0||i>=s.templates.length)||new Set(s.programme.completed).size!==s.programme.completed.length))throw Error('Invalid program rotation');
  if(records.some(w=>w.phase!=null&&!['Heavy','Mid','Light'].includes(w.phase)))throw Error('Invalid workout phase');
  if(records.some(w=>w.restStarted!=null&&!number(w.restStarted)))throw Error('Invalid rest timer');
  if(s.settings.restTimer!==undefined&&typeof s.settings.restTimer!=='boolean')throw Error('Invalid timer preference');

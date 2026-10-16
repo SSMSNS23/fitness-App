@@ -15,7 +15,7 @@ test('actual session order screen previews, cancels, saves and drives sequence w
  await run("action('orderMove:2:-1')");assert.equal(JSON.stringify(saved),before);assert.equal(JSON.stringify(run('orderDraft.indices')),'[0,2,1,3]');
  context.confirm=()=>false;await run("go('history')");assert.equal(run('page'),'sessionOrder');await run("action('cancelOrder')");assert.equal(JSON.stringify(saved),before);
  context.confirm=()=>true;await run("action('reorderSessions')");await run("action('orderMove:2:-1')");await run("action('saveOrder')");assert.equal(run('page'),'training');assert.deepEqual(saved.programme.order,[0,2,1,3]);assert.equal(saved.next,2);assert.deepEqual(saved.programme.completed,[1]);assert.equal(JSON.stringify(saved.history),historyBefore);
- const sessionList=run('training()').split('<h2>Programme sessions</h2>')[1];assert.ok(sessionList.indexOf('&lt;Upper &amp; B&gt;')<sessionList.indexOf('Lower A'));
+ const sessionList=run('training()').split('<h2>Program sessions</h2>')[1];assert.ok(sessionList.indexOf('&lt;Upper &amp; B&gt;')<sessionList.indexOf('Lower A'));
  run('detail=null');const historyHtml=run('history()');assert.ok(historyHtml.indexOf('value="2"')<historyHtml.indexOf('value="1"'));
  await run('start(2)');assert.equal(saved.active.name,'<Upper & B>');const activeBefore=JSON.stringify(saved);await run("action('reorderSessions')");assert.equal(JSON.stringify(saved),activeBefore);assert.equal(run('page'),'active');
  await run("action('finishConfirmed:'+s.active.id)");assert.equal(saved.next,3);assert.equal(saved.history[0].id,'old');assert.equal(JSON.stringify(saved.history[0]),JSON.stringify(JSON.parse(historyBefore)[0]));

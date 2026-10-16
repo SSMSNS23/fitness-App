@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Flexible range progression v0.17.0
+
+Change current block can move to any configured range/round. Undo last change restores the most recent block setup while no workout or conflicting program change has occurred. Manage program now edits the order of Heavy/Medium/Light and one or two rounds for each range. Existing round progress is retained when saving a sequence where possible, and completed-session progression remains independent of calendar dates. Visible app wording uses Program. All 109 automated checks pass; phone layout still needs review.
+
 ## Training block home screen v0.16.0
 
 Training now opens with a vertical Heavy → Medium → Light indicator, the current round (1 or 2), and completed/remaining sessions for that round. Start next workout or Resume is prominent; a checklist marks Completed, Next, Remaining, Paused and In progress. Edit/Delete remain beside sessions. Add, duplicate, order and progression controls sit inside Manage programme. Existing programmes using individual ranges have a Use training blocks action to switch future sessions together; historical ranges are preserved. Progress advances after completed sessions, never elapsed calendar time. All 100 automated checks pass; phone layout still needs review.

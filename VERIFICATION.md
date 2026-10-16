@@ -1,5 +1,15 @@
 # Verification — 16 October 2026
 
+## v0.17.0 reversible blocks and configurable progression
+
+Added Change current block at the top of Training, offering each configured range/round, and a persistent single-step Undo last change for new block/progression changes. Undo restores previous mode, current step, completion, next session and individual session ranges without changing history or exercise data. Undo requires an unchanged program structure/progression/history record list and no active workout. An earlier block can still be chosen explicitly after undo becomes unavailable. Existing v0.16 changes have no retroactive undo snapshot.
+
+Manage program edits all three ranges in any order and one or two rounds per range, including mixed lengths. Saves map the existing current range/round into the new sequence and preserve current completion where possible. Selecting a different block resets that round's completion and starts with the first enabled session; undo restores the prior completion. Both forms reject stale rendered state. Invalid ranges, duplicates and round counts reject atomically. Active workouts block progression changes.
+
+Default legacy six-step cycles remain Heavy twice → Medium twice → Light twice. Custom step validation, normal completion, deletion boundaries and program import use the configured cycle length. Imports retain the range plan while resetting session order/round completion and dropping old undo. Visible labels, copy and error messages use Program; internal persisted keys/import identifiers remain compatible.
+
+Validation: all 109 automated checks pass. Nine new tests cover one-round cycles, custom/mixed order and rounds, round-trip backups, undo and its expiry, manual-range restoration, invalid/stale/active mutations, deletion/import boundaries, legacy running snapshots and actual UI submit/undo flows. App/model/store/service-worker syntax and full stylesheet parsing pass. Offline/visible version v0.17.0. Browser/iPhone appearance remains unverified here.
+
 ## v0.16.0 training block home screen
 
 Replaced the six-slot rotation strip and Training structure control with a three-range vertical indicator, current round and current-round completion bar. The programme checklist exposes completion, next, remaining, paused and in-progress status. The hero resumes the actual running workout even when another session was selected. Selecting another session offers Back to next workout. Configuration is grouped in a closed Manage programme section; session Edit/Delete remain visible.
