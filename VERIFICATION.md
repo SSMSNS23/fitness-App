@@ -1,5 +1,11 @@
 # Verification — 16 October 2026
 
+## v0.6.0 session names and training tags
+
+Added independent session names and optional Heavy, Medium (stored as Mid for compatibility), Light or no-tag values in Add/Edit Session. Existing sessions continue following their automatic rotation unless explicitly changed. Training structure can switch to session tags, which keeps the session sequence but stops automatic range changes. Mode changes are blocked during an active workout. Session edits preserve past workout names and tags. Programme import and full backup restore retain tags and the selected structure.
+
+Validation: all 43 model tests passed, including six new tests for tag snapshots and backup restore, 28 manual sessions without automatic range changes, fixed and no-tag overrides without stalled rotation, matching-range prefill, mode-change protection, and programme import/invalid data rejection. A VM check using the actual application editor, snapshot and submit handlers passed Add Session → choose Medium → Add Exercise without losing the tag → save → switch to session tags → reopen → backup round trip → start with the saved name/tag. App and service worker syntax checks passed. Browser visual QA was unavailable for this change; iPhone appearance remains to be confirmed.
+
 ## v0.5.0 workout review and result columns
 
 ### Backup round trip — 16 October 2026
