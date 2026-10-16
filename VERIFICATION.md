@@ -2,6 +2,10 @@
 
 ## v0.5.0 workout review and result columns
 
+### Backup round trip — 16 October 2026
+
+The live app's Download backup control produced a valid JSON backup in the direct, isolated sandbox app. After changing the test unit preference, Restore backup restored the file successfully. A second downloaded backup matched every original field exactly except the internal revision counter, including all templates, workout history, logged and unlogged sets, active state, next session, phase cycle and settings. The test contained four sessions and one saved workout with one logged set. Real user records were not accessed or modified. The download event was not captured from the QA iframe; direct app download and restore both succeeded.
+
 - All 37 model checks pass with `node --test tests/model.test.mjs`.
 - JavaScript syntax checks pass for app.js and sw.js.
 - An isolated runtime check of the actual finish handler confirms that incomplete workouts remain active until acknowledged, an acknowledgement for another workout cannot finish the current workout, explicit acknowledgement preserves recorded set values, and fully logged workouts finish directly.
