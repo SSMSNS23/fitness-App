@@ -1,5 +1,15 @@
 # Verification — 16 October 2026
 
+## v0.14.0 compact sets and visible superset containers
+
+Previous performance is now an independently collapsible native details panel, closed by default. Its per-exercise open state survives logging, adjustments and comparison changes while the workout remains open; it resets for a new workout or changed exercise layout. Stale detached toggle events are ignored. Collapsing reference data does not collapse the exercise or change its logged data.
+
+Each exercise's sets share one bordered panel with compact rows, a Log/Undo button in the row heading, and side-by-side Weight/Reps columns. On narrow panels, large numeric fields have paired minus/plus controls beneath; on wider panels a container query puts steppers inline. All buttons retain at least 44px touch targets. Repetitive helper copy and per-set outer spacing were removed.
+
+Superset/giant-set members now appear together inside one distinctive amber-bordered container, with a shared title, member count, round instruction and each member's position. Non-adjacent members are collected for display only; original indices, stored order, logging actions, history snapshots and rest logic are preserved. Saved workout summaries/history also present groups together.
+
+Validation: all 91 checks passed. New tests cover read-only non-adjacent grouping without duplicates and an actual-handler flow for collapsed defaults, independently remembered reference toggles through edits/logs, original-index group logging/rest, stale toggle rejection and unchanged historical data. Updated the existing group UI assertion to the new shared-container/member-label presentation. App/service-worker syntax and full stylesheet parsing, including container rules, passed; offline version is updated. Browser/iPhone visual spacing remains unverified here and needs a phone check.
+
 ## v0.13.0 visual refinement
 
 Introduced a separate polish.css layer for consistent deep-slate/amber dark mode and warm off-white light mode, system typography, quieter secondary controls, consistent radii and spacing, segmented Training tabs and a less prominent bottom navigation. The selected workout now has a range badge, clear exercise/set counts and Start as its primary action, with edit/duplicate controls below the exercise preview. Training structure is an expandable section with its current mode visible. Session rows have ordered number markers and grouped add/reorder controls. Existing data actions and save behaviour are retained.

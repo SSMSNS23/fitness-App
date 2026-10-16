@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Compact logging and clear groups v0.14.0
+
+Previous performance collapses independently and starts closed. Current sets share one compact panel, with weight/reps columns side by side and Log/Undo actions in each set heading. Supersets and giant sets share an obvious bordered container, including non-adjacent members, while stored order and data indices stay intact. Summaries/history also show groups together. All 91 checks pass; responsive appearance still needs an iPhone review.
+
 ## Visual refinement v0.13.0
 
 A restrained slate/amber visual system with a warm light theme, clearer Start action, ordered session rows, compact expandable training structure, segmented views and distinct previous-performance panels. Large logging controls and all saved-data behaviour are retained. The separate polish.css layer is cached offline. All 89 existing checks pass, plus stylesheet parsing and key contrast checks. Actual visual spacing and viewport layout still need an iPhone review.

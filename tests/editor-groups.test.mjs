@@ -24,7 +24,8 @@ test('actual editor handlers group/save/log/ungroup with historical snapshots an
  form();await submit();assert.equal(saved.templates[0].exercises[0].group,saved.templates[0].exercises[2].group);
  assert.match(run('training()'),/Superset 1/);
  await run('start(0)');await run("action('expandAll')");const openBefore=JSON.stringify([...run('expanded')]);
- assert.match(run('active()'),/Superset 1 · 2\/2/);
+ assert.match(run('active()'),/class="exercise-group" aria-label="Superset 1"/);
+ assert.match(run('active()'),/Exercise 2 of 2/);
  await run("action('log:2:0')");assert.equal(saved.active.restStarted,null);
  await run("action('log:0:0')");assert.ok(saved.active.restStarted);assert.equal(JSON.stringify([...run('expanded')]),openBefore);
  const templateBefore=JSON.stringify(saved.templates);
