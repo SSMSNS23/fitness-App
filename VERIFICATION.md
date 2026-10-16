@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.12.0 drag to reorder exercises
+
+Programme and today's-workout editors have a Move grip on each exercise, retaining the existing up/down buttons. Pointer dragging snapshots current form values, shows a source and insertion marker, scrolls near viewport edges, and moves the complete exercise object only on release. Draft changes still require Save. A small movement threshold prevents taps from moving/scolling. Pointer cancellation, lost capture, Escape, focus loss, hidden documents and replaced editor DOM cancel safely. No drag handles appear in historical correction or active logging screens. Only the handle disables native touch scrolling.
+
+Groups, per-set presets, increments and logged sets stay attached to the exercise. Existing today-only versus programme saving and rest-timestamp remapping are retained. The service worker caches reorder.js with the release.
+
+Validation: all 89 tests passed. Seven module checks cover insertion geometry, object identity and bounds, primary pointer release-only commits, tap/jitter prevention, cancellation paths, bounded edge scrolling, stale DOM and disabled/secondary pointers. An actual application wiring test passes pointer drag → preserve typed weight/logged state/group → no persistence before Save → Save for today without modifying the template; programme handles, existing arrows and history exclusion are checked. All existing workflows passed, plus app/module/service-worker syntax. Browser/iPhone touch behaviour and visual appearance remain unverified for this release; phone testing is needed for the new gesture.
+
 ## v0.11.0 session ordering
 
 Programme has Reorder sessions, with large labelled up/down controls, a draft preview and explicit Save order/Cancel. Reordering is blocked while a workout is running. It changes a separate programme sequence, leaving template indices, session IDs and every historical snapshot unchanged. The existing next workout and completed rotation markers stay intact. Future advancement follows the custom order and skips paused sessions. New sessions append; mode changes and backups preserve order; a new programme import resets order to its supplied list.

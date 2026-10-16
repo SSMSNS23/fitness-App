@@ -1,0 +1,19 @@
+export function dropPosition(rows,from,y){const remaining=rows.filter((_,i)=>i!==from);const before=remaining.findIndex(row=>y<row.getBoundingClientRect().top+row.getBoundingClientRect().height/2);return before<0?remaining.length:before;}
+export function moveExercise(exercises,from,to){if(!Number.isInteger(from)||!Number.isInteger(to)||from<0||to<0||from>=exercises.length||to>=exercises.length)throw Error('Invalid exercise position');if(from===to)return false;const [exercise]=exercises.splice(from,1);exercises.splice(to,0,exercise);return true;}
+
+export function installExerciseDrag({root,viewport,enabled,snapshot,move,announce=()=>{}}){
+ let drag=null,frame=null;
+ const clearMarks=()=>{for(const row of root.querySelectorAll('[data-exercise-row]'))row.classList.remove('drag-source','drop-before','drop-after');};
+ function locate(){if(!drag)return;const rows=[...root.querySelectorAll('[data-exercise-row]')];drag.to=dropPosition(rows,drag.from,drag.y);clearMarks();rows[drag.from]?.classList.add('drag-source');if(drag.to!==drag.from){const rest=rows.filter((_,i)=>i!==drag.from);const before=rest[drag.to];(before??rest.at(-1))?.classList.add(before?'drop-before':'drop-after');}}
+ function finish(commit=false){if(!drag)return;const current=drag;drag=null;if(frame!==null)viewport.cancelAnimationFrame(frame);frame=null;clearMarks();current.handle.removeAttribute('aria-pressed');try{if(current.handle.hasPointerCapture?.(current.pointerId))current.handle.releasePointerCapture(current.pointerId);}catch{}if(commit&&current.from!==current.to&&current.handle.isConnected!==false&&enabled())move(current.from,current.to);}
+ function tick(){frame=null;if(!drag)return;if(!enabled()||drag.handle.isConnected===false){finish();return;}if(drag.moved){const top=viewport.visualViewport?.offsetTop??0,height=viewport.visualViewport?.height??viewport.innerHeight,bottom=top+height-90;const speed=drag.y<top+70?-Math.min(16,(top+70-drag.y)/5):drag.y>bottom-70?Math.min(16,(drag.y-bottom+70)/5):0;if(speed)viewport.scrollBy(0,speed);locate();}frame=viewport.requestAnimationFrame(tick);}
+ root.addEventListener('pointerdown',event=>{const handle=event.target.closest?.('[data-drag-exercise]');if(!handle||!enabled()||event.isPrimary===false||event.button!==undefined&&event.button!==0)return;const from=Number(handle.dataset.dragExercise),rows=[...root.querySelectorAll('[data-exercise-row]')];if(!Number.isInteger(from)||!rows[from])return;finish();snapshot();event.preventDefault();handle.focus?.({preventScroll:true});drag={handle,from,to:from,y:event.clientY,startY:event.clientY,moved:false,pointerId:event.pointerId};handle.setAttribute('aria-pressed','true');try{handle.setPointerCapture?.(event.pointerId);}catch{}rows[from].classList.add('drag-source');announce('Drag to another exercise, then release. Use the arrow buttons if you prefer.');frame=viewport.requestAnimationFrame(tick);});
+ root.addEventListener('pointermove',event=>{if(!drag||event.pointerId!==drag.pointerId)return;event.preventDefault();drag.y=event.clientY;drag.moved||=Math.abs(drag.y-drag.startY)>=6;if(drag.moved)locate();},{passive:false});
+ root.addEventListener('pointerup',event=>{if(!drag||event.pointerId!==drag.pointerId)return;event.preventDefault();drag.y=event.clientY;drag.moved||=Math.abs(drag.y-drag.startY)>=6;if(drag.moved)locate();finish(drag.moved);});
+ root.addEventListener('pointercancel',event=>{if(drag&&event.pointerId===drag.pointerId)finish();});
+ root.addEventListener('lostpointercapture',event=>{if(drag&&event.pointerId===drag.pointerId)finish();});
+ root.addEventListener('keydown',event=>{if(drag&&event.key==='Escape'){event.preventDefault();finish();announce('Move cancelled.');}});
+ root.addEventListener('visibilitychange',()=>{if(root.hidden)finish();});
+ viewport.addEventListener?.('blur',()=>finish());
+ return ()=>finish();
+}

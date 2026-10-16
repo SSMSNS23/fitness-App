@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Exercise drag handles v0.12.0
+
+Programme and today's-workout editors offer a Move grip for pointer/touch reordering, including drop indicators and edge scrolling. Arrow buttons remain available. Dragging changes only the edit draft; Save applies it. Complete exercise data, groups and logged sets move together. Historical correction and active logging have no drag handles. All 89 automated checks pass; the new touch gesture still requires an iPhone check.
+
 ## Session ordering v0.11.0
 
 Training → Reorder sessions previews a sequence with up/down controls and explicit Save order. It retains the current next workout, completed rotation markers, stable session identities and all historical snapshots. Paused sessions keep their place and are skipped. New sessions append; mode changes and backup restore retain the sequence. Reordering is blocked during a running workout, and stale changes are rejected. All 81 automated checks pass; latest iPhone appearance still needs confirmation.
