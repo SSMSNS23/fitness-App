@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Session ordering v0.11.0
+
+Training → Reorder sessions previews a sequence with up/down controls and explicit Save order. It retains the current next workout, completed rotation markers, stable session identities and all historical snapshots. Paused sessions keep their place and are skipped. New sessions append; mode changes and backup restore retain the sequence. Reordering is blocked during a running workout, and stale changes are rejected. All 81 automated checks pass; latest iPhone appearance still needs confirmation.
+
 ## Training progress v0.10.0
 
 Training → Progress shows logged workout/set/rep totals, lifting volume, date-spaced per-exercise load charts and actual new load records. Use 4-week, 12-week or all-time periods and range filters. Charts and totals respect global kg/lb. Workout links return to Progress with filters preserved. Unlogged sets and active workouts are excluded; records require earlier actual data and recalculate after corrections. All 73 automated checks pass; latest iPhone appearance still needs confirmation. Programme-wide strength indexing remains a later enhancement.

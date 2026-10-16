@@ -8,6 +8,7 @@ export function validate(s){
  if(s?.programme?.mode!==undefined&&!['auto','manual'].includes(s.programme.mode))throw Error('Invalid programme mode');
  if(s?.templates?.some(t=>t.phase!==undefined&&t.phase!==null&&!['Heavy','Mid','Light'].includes(t.phase)))throw Error('Invalid session tag');
  if(!s||![1,2].includes(s.version)||!Array.isArray(s.templates)||(s.templates.length<1||s.templates.length>50||!s.templates.some(t=>t.enabled!==false))||!Array.isArray(s.history)||!Number.isInteger(s.next)||s.next<0||s.next>=s.templates.length||!s.settings)throw Error('Unrecognised training data');
+ if(s.programme?.order!==undefined&&(!Array.isArray(s.programme.order)||s.programme.order.length>s.templates.length||new Set(s.programme.order).size!==s.programme.order.length||s.programme.order.some(i=>!Number.isInteger(i)||i<0||i>=s.templates.length)))throw Error('Invalid session order');
  if(!['system','light','dark'].includes(s.settings.theme)||!['kg','lb'].includes(s.settings.unit)||!number(s.settings.increment,.01)||!number(s.settings.inactivityHours,2)||s.settings.inactivityHours>24)throw Error('Invalid preferences');
  if(s.templates.some(t=>typeof t.name!=='string'||!t.name.trim()||!Array.isArray(t.exercises)||t.exercises.some(e=>typeof e.name!=='string'||!e.name.trim()||!Number.isInteger(e.sets)||e.sets<1||e.sets>12||!Number.isInteger(e.reps)||!number(e.reps)||!number(e.weight))))throw Error('Invalid programme');
  const records=[...s.history,...(s.active?[s.active]:[])];
@@ -24,7 +25,7 @@ export function validate(s){
  if(s.templates.some(t=>t.exercises.some(e=>e.presets!==undefined&&(!Array.isArray(e.presets)||e.presets.length>e.sets||e.presets.some(z=>!number(z.weight)||!Number.isInteger(z.reps)||!number(z.reps))))))throw Error('Invalid per-set starting values');
  return s;
 }
-export function migrate(raw){const s=validate(raw);if(s.version===1){s.version=2;s.revision=0;s.templates.forEach((t,i)=>{t.id=`session-${i}`;t.exercises.forEach((e,j)=>{e.id=`migrated-${i}-${j}`;if(Object.hasOwn(s.settings.overrides??{},e.name))e.increment=s.settings.overrides[e.name];})});}if(s.templates[s.next]?.enabled===false)s.next=s.templates.findIndex(t=>t.enabled!==false);s.settings.overrides??={};s.settings.restTimer??=true;s.programme??={step:0,completed:[]};return s;}
+export function migrate(raw){const s=validate(raw);if(s.version===1){s.version=2;s.revision=0;s.templates.forEach((t,i)=>{t.id=`session-${i}`;t.exercises.forEach((e,j)=>{e.id=`migrated-${i}-${j}`;if(Object.hasOwn(s.settings.overrides??{},e.name))e.increment=s.settings.overrides[e.name];})});}if(s.templates[s.next]?.enabled===false)s.next=[...(s.programme?.order??[]),...s.templates.map((t,i)=>i)].find(i=>s.templates[i].enabled!==false);s.settings.overrides??={};s.settings.restTimer??=true;s.programme??={step:0,completed:[]};return s;}
 let db,queue=Promise.resolve();
 export async function open(){
  db=await new Promise((resolve,reject)=>{const r=indexedDB.open('personal-training-log'+(SANDBOX?'-qa':''),1);r.onupgradeneeded=()=>r.result.createObjectStore('state');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Close other Training Log tabs and try again'));});

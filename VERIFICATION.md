@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.11.0 session ordering
+
+Programme has Reorder sessions, with large labelled up/down controls, a draft preview and explicit Save order/Cancel. Reordering is blocked while a workout is running. It changes a separate programme sequence, leaving template indices, session IDs and every historical snapshot unchanged. The existing next workout and completed rotation markers stay intact. Future advancement follows the custom order and skips paused sessions. New sessions append; mode changes and backups preserve order; a new programme import resets order to its supplied list.
+
+Saving checks that the session identities and original order still match, rejecting concurrent programme changes. Invalid/malformed order data is rejected. Paused-next backup recovery respects custom order. Training lists and History filter options follow the saved sequence. Failed save retries finish the order screen correctly, and cancelling discards the pending order action.
+
+Validation: all 81 tests passed. Seven model checks cover historical/identity isolation, manual wrapping and pauses, automatic phase progression, partial rotations, append/mode/import/backup behaviour, invalid/stale/active save rejection and ordered backup recovery. An actual-handler VM check covers labelled/escaped preview, draft moves without persistence, navigation-discard cancellation, Cancel unchanged, Save, displayed and filter order, pinned next/completed state, active-workout blocking, subsequent advancement and backup restore. App and service-worker syntax passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.10.0 training progress
 
 Training has Programme / Exercises / Progress views. Progress provides 4-week, 12-week and all-time filters, plus All / Heavy / Medium / Light / No tag ranges. Summary totals count finished workouts with actual logged sets, logged sets, reps and lifting volume (sum of recorded load × reps). Unlogged sets and active workouts are excluded. Date windows use local calendar days and exclude future starts.
