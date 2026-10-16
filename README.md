@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Compact workout status v0.14.1
+
+Workout range, save status, set progress, elapsed time and the optional rest timer now share one compact card. The editing toolbar has a shorter visible label while retaining its full accessible name. All 91 automated checks pass; iPhone visual review remains outstanding.
+
 ## Compact logging and clear groups v0.14.0
 
 Previous performance collapses independently and starts closed. Current sets share one compact panel, with weight/reps columns side by side and Log/Undo actions in each set heading. Supersets and giant sets share an obvious bordered container, including non-adjacent members, while stored order and data indices stay intact. Summaries/history also show groups together. All 91 checks pass; responsive appearance still needs an iPhone review.

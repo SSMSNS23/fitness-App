@@ -1,5 +1,11 @@
 # Verification — 16 October 2026
 
+## v0.14.1 compact workout status
+
+Combined range, local-save status, logged/planned set count, elapsed time, progress bar and optional rest timer into one workout card. Set and time values use aligned two-column metrics; rest reset retains its action and timer data attributes. The editing toolbar reads Edit workout with its full accessible label. Save-status hooks and all logging actions remain unchanged.
+
+Validation: all 91 automated checks pass, plus app/service-worker syntax and stylesheet parsing. Offline cache and visible version are v0.14.1. Browser/iPhone spacing has not been visually verified.
+
 ## v0.14.0 compact sets and visible superset containers
 
 Previous performance is now an independently collapsible native details panel, closed by default. Its per-exercise open state survives logging, adjustments and comparison changes while the workout remains open; it resets for a new workout or changed exercise layout. Stale detached toggle events are ignored. Collapsing reference data does not collapse the exercise or change its logged data.

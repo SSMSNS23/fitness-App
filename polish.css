@@ -124,3 +124,12 @@ h2{font-size:18px;font-weight:700;letter-spacing:-.35px}h3{font-weight:650;line-
  .current-sets .compact-set .qty button,body.light .current-sets .compact-set .qty button{height:48px;min-height:48px}
  .current-sets .qty button:nth-of-type(1){grid-column:1;grid-row:1}.current-sets .qty button:nth-of-type(2){grid-column:3;grid-row:1}
 }
+.workout-status{padding:16px}
+.status-topline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.workout-status .saved{font-size:11px;white-space:normal}
+.workout-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+.workout-metrics>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.workout-metrics strong{font-size:26px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}
+.workout-metrics strong>span{font-size:16px;font-weight:500;color:var(--muted)}
+.metric-label{font-size:11px;color:var(--muted)}
+.workout-status>.rest-bar{border:0;border-top:1px solid var(--border);border-radius:0;padding:10px 0 0;margin:12px 0 0;background:transparent}
