@@ -1,5 +1,15 @@
 # Verification — 16 October 2026
 
+## v0.8.0 supersets and giant sets
+
+Programme and today's-workout editors now include an expandable Supersets & giant sets panel. Select any two exercises (including non-adjacent rows) and Group selected for a superset; three or more form a giant set. Ungroup selected removes chosen memberships; Ungroup removes an entire group. Exercise order stays unchanged, singleton remnants are cleared on save, and draft changes require the editor's existing save action. Replacing today's exercise keeps its group membership.
+
+Existing imported string group markers are recognised automatically. Group badges appear in programme previews, active exercises, finish review and saved summary/history. Groups are workout snapshots and survive backup/import/duplication. Editing a future template does not change old groups in history. No automatic exercise opening, advancement or collapse was added.
+
+Individual set timestamps are retained, but grouped rest starts only once every exercise with that round's set index is logged. Unequal set counts use the remaining participants. Undoing a group member restores the most recent completed round or standalone set. Duplicate logs do not restart rest. Today's reorder/group changes recalculate eligible rest while retaining a manual reset if the underlying completed-round timestamp is unchanged.
+
+Validation: all 59 tests passed. Seven model checks cover non-adjacent grouping, giant sets, regrouping/singleton cleanup, full-round/out-of-order/undo rest, unequal set counts, snapshot/backup/import/duplicate preservation, invalid metadata, and today's reorder/save behaviour. One end-to-end VM test uses actual application editor/action/snapshot/submit handlers for group → save template → start/log without forced collapse → group today only → finish review → saved history → ungroup future template → unchanged historical group → backup restore. App/service worker syntax checks passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.7.0 edit today's workout
 
 Active workouts offer Edit today's workout. The dedicated draft editor supports names, per-set weights/reps, adding/removing sets (1–12), adding/removing/replacing exercises, and reordering. Existing logged states travel with the exercise. Removing/replacing an exercise or last set that is logged requires confirmation; Cancel discards only the edit draft. Save for today changes only the running workout; Save today & programme explicitly also replaces this session's future exercise list/name and per-set starting values. It preserves the template's range policy, workout phase/start time, earlier history and programme position. Future starting values contain no logged flags.

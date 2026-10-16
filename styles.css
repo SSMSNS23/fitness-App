@@ -85,4 +85,11 @@ body.light .setcard.done>.row:first-child>strong{color:#176247}
 .preview-exercise>span:first-child{min-width:0;overflow-wrap:anywhere}
 .preview-exercise>span:last-child{flex-shrink:0;white-space:nowrap}
 .field input[type="checkbox"]{width:20px;height:20px;padding:0;vertical-align:middle;margin-right:8px;accent-color:var(--green)}
+.group-badge{display:block;width:fit-content;max-width:100%;margin:7px 0;color:var(--gold);border:1px solid var(--border);border-radius:8px;padding:5px 8px;font-size:11px;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
+.group-editor summary{font-weight:750;cursor:pointer;min-height:44px;display:list-item;padding:10px 0;line-height:1.5}
+.group-editor summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:5px}
+.group-choice{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 0;border-top:1px solid var(--border);cursor:pointer;font-size:14px;line-height:1.5}
+.group-choice input[type="checkbox"]{width:22px;height:22px;min-height:22px;margin:0;padding:0;flex-shrink:0;accent-color:var(--green)}
+.group-choice>span{min-width:0;overflow-wrap:anywhere}.group-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:10px 0;border-bottom:1px solid var(--border)}
+.group-summary>span{display:flex;flex-direction:column;gap:5px;min-width:0;overflow-wrap:anywhere}.group-summary button{flex-shrink:0}
 .phase-label{font-size:12px;color:var(--gold);margin:12px 0;line-height:1.6}.phase-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin:12px 0 18px}.phase-steps span{font-size:11px;text-align:center;color:var(--muted);padding-top:9px;border-top:4px solid var(--border)}.phase-steps .current{color:var(--gold);border-color:var(--gold)}.comparison-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}.comparison-tabs button{flex:1;font-size:12px;padding:8px;min-height:44px}.rest-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--border);padding:10px 14px;border-radius:12px;margin:12px 0;color:var(--muted)}.rest-bar strong{font-variant-numeric:tabular-nums;color:var(--text);margin-left:9px;font-size:19px}

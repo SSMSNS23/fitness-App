@@ -11,6 +11,7 @@ export function validate(s){
  if(!['system','light','dark'].includes(s.settings.theme)||!['kg','lb'].includes(s.settings.unit)||!number(s.settings.increment,.01)||!number(s.settings.inactivityHours,2)||s.settings.inactivityHours>24)throw Error('Invalid preferences');
  if(s.templates.some(t=>typeof t.name!=='string'||!t.name.trim()||!Array.isArray(t.exercises)||t.exercises.some(e=>typeof e.name!=='string'||!e.name.trim()||!Number.isInteger(e.sets)||e.sets<1||e.sets>12||!Number.isInteger(e.reps)||!number(e.reps)||!number(e.weight))))throw Error('Invalid programme');
  const records=[...s.history,...(s.active?[s.active]:[])];
+ if([...s.templates,...records].some(w=>w.exercises?.some(e=>e.group!=null&&(typeof e.group!=='string'||e.group.length>200))))throw Error('Invalid exercise group');
  if(records.some(w=>typeof w.id!=='string'||typeof w.name!=='string'||!number(w.started)||!number(w.lastActivity)||!Number.isInteger(w.templateIndex)||w.templateIndex<0||!Array.isArray(w.exercises)||w.exercises.some(e=>typeof e.name!=='string'||!Array.isArray(e.sets)||e.sets.some(z=>!number(z.weight)||!Number.isInteger(z.reps)||!number(z.reps)||typeof z.done!=='boolean'))))throw Error('Invalid workout records');
  if(s.history.some(w=>!number(w.ended)||w.ended<w.started)||new Set(records.map(w=>w.id)).size!==records.length)throw Error('Invalid workout dates or duplicate records');
  if(s.settings.overrides&& (typeof s.settings.overrides!=='object'||Object.values(s.settings.overrides).some(v=>!number(v,.01))))throw Error('Invalid exercise increments');

@@ -1,12 +1,18 @@
 # Personal Training Log
 
+## Supersets and giant sets v0.8.0
+
+Session editors and Edit today's workout have a Supersets & giant sets panel. Select any two exercises for a superset or three or more for a giant set; non-adjacent selections and ungrouping are supported. Save the editor to apply changes. Imported group markers are recognised. Labels remain visible in programme previews, running workouts, summaries and historical snapshots. Rest starts after the full grouped round; exercise navigation stays manual. All 59 automated checks pass; latest iPhone appearance still needs confirmation.
+
+Sessions also support independent names/range tags, optional automatic rotation, editable duplication, and explicit today-only versus today-and-programme edits.
+
 ## Flexible programme v0.4.0
 
 Use any number of active sessions (1–50). Add sessions from Programme, rename in Edit, or pause/enable sessions without deleting their workout history. Heavy/Mid/Light phases each use two complete rotations of the active sessions. A three-session programme therefore completes a phase in six workouts.
 
 Settings → Import programme file accepts a programme-only JSON document. It changes future session templates, preserves every historical snapshot, and starts a fresh rotation in the current phase. Active workouts must be finished first. Different per-set starting weights/reps are supported by imported templates. Missing screenshot values remain blank on the logging screen until entered; provisional set counts remain editable.
 
-37 automated model checks pass. Personal programme imports and workout logs remain private local data; they must never be committed to this public repository. Superset metadata may be retained in imports, but grouped exercise/rest behaviour is not implemented yet.
+Personal programme imports and workout logs remain private local data; they must never be committed to this public repository. Superset markers retained in imports now drive grouped labels and round-based rest behaviour.
 
 
 ## Training refinement v0.3.0
@@ -26,7 +32,7 @@ A buildless iPhone-first personal workout tracker. No accounts, external APIs, s
 - Four clearly labelled editable example sessions: Upper A → Lower A → Upper B → Lower B.
 - Dedicated programme editor with Save Workout, add/remove exercises, reorder controls, starting loads/reps/sets and optional exercise weight increments.
 - Large Start Workout; deliberate session selection explains how it affects the cycle.
-- One vertical workout screen with manually collapsible exercises and one open at a time. Finishing the last set does not advance or collapse it.
+- One vertical workout screen with independently collapsible exercises, Expand all and Collapse all. Finishing the last set does not advance or collapse it.
 - Direct number entry, large weight/reps controls, immediate save, logged-set corrections and undo.
 - Previous session's individual set tiles, actual previous-set prefilling and highest recorded load comparisons.
 - Finish at any point; exact logged-set count and wall-clock duration; Done returns to Programme.
@@ -73,4 +79,4 @@ With a recent Node.js version, run the tests from the repository root:
 
 ## Deferred
 
-Nutrition, Weight, rest timer, supersets/giant sets, drag handles, exercise-library discovery, full progress analytics, temporary workout changes, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
+Nutrition, Weight, drag handles, exercise-library discovery, full progress analytics, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
