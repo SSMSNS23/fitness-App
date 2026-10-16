@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.7.0 edit today's workout
+
+Active workouts offer Edit today's workout. The dedicated draft editor supports names, per-set weights/reps, adding/removing sets (1–12), adding/removing/replacing exercises, and reordering. Existing logged states travel with the exercise. Removing/replacing an exercise or last set that is logged requires confirmation; Cancel discards only the edit draft. Save for today changes only the running workout; Save today & programme explicitly also replaces this session's future exercise list/name and per-set starting values. It preserves the template's range policy, workout phase/start time, earlier history and programme position. Future starting values contain no logged flags.
+
+Save checks the workout identity, inactivity expiration, and an exact original active snapshot; permanent edits also check the original template. Conflicting edits are rejected rather than overwriting another tab. Candidate data is validated before applying either update. Rest timestamps are remapped when exercises move and removed when their logged sets are removed.
+
+Validation: all 51 model tests passed, including today-only isolation, reordered logged sets/rest undo, removal timer behaviour, explicit future template updates, unchanged historical snapshots, stale/expired save rejection and invalid draft atomicity. Actual application action/snapshot/submit handlers passed Add/Reorder → Cancel unchanged → protect removal of a logged exercise → Save for today without template changes → reopen → Save today & programme. Existing duplication/tag editor workflows also passed; app and service worker syntax passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.6.2 duplicate session
 
 Training now offers Duplicate session beside Edit name & tag. It opens an unsaved draft with a unique copy name, a new session ID and independent cloned exercises, preserving range tag/default inheritance, per-set presets and increments. Exercise IDs remain shared because these are the same exercises, supporting existing performance references. A paused source produces an enabled copy. Save appends and selects the new session; Cancel leaves state untouched. History and the active workout are not copied or modified. The existing 50-session limit is enforced before opening and on save.

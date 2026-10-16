@@ -2,6 +2,26 @@ import {clone,validate} from './store.js';
 export const matches=(a,b)=>(a.id&&a.id===b.id)||a.name===b.name;
 export const enabledIndices=state=>state.templates.flatMap((t,i)=>t.enabled===false?[]:[i]);
 export const PHASES=['Heavy','Mid','Light'];
+export function saveWorkoutEdits(state,id,draft,now,saveTemplate=false,original=null,originalTemplate=null){
+ const current=state.active;
+ if(current?.id!==id)throw Error('This workout has already ended. Return to Training.');
+ if(isExpired(state,now))throw Error('This workout has expired. Return to Training to save it.');
+ if(original&&JSON.stringify(current)!==JSON.stringify(original))throw Error('This workout changed elsewhere. Cancel and reopen the editor.');
+ const template=state.templates[current.templateIndex];
+ if(saveTemplate&&(!template||originalTemplate&&JSON.stringify(template)!==JSON.stringify(originalTemplate)))throw Error('The programme changed elsewhere. Cancel and reopen the editor.');
+ if(typeof draft.name!=='string'||!draft.name.trim()||draft.name.length>100||!Array.isArray(draft.exercises)||!draft.exercises.length||draft.exercises.some(e=>!e.name?.trim()||e.name.length>120||!Array.isArray(e.sets)||e.sets.length<1||e.sets.length>12||e.sets.some(z=>z.done&&z.reps<1)))throw Error('Keep an exercise, give each a name and use 1–12 sets with valid reps.');
+ const exercises=clone(draft.exercises),restLog={};
+ exercises.forEach((ex,i)=>{const oldIndex=current.exercises.findIndex(old=>matches(old,ex));ex.sets.forEach((z,j)=>{const stamp=current.restLog?.[oldIndex+':'+j];if(z.done&&stamp!==undefined)restLog[i+':'+j]=stamp;});});
+ const oldTimes=Object.values(current.restLog??{}),newTimes=Object.values(restLog);
+ const restStarted=oldTimes.length&&newTimes.length<oldTimes.length?(newTimes.length?Math.max(...newTimes):null):current.restStarted;
+ const candidate=clone(state);
+ candidate.active={...clone(current),name:draft.name.trim(),exercises,restLog,restStarted,lastActivity:now};
+ if(saveTemplate)candidate.templates[current.templateIndex]={...clone(template),name:draft.name.trim(),example:false,exercises:exercises.map(ex=>({...ex,sets:ex.sets.length,weight:ex.sets[0].weight,reps:ex.sets[0].reps,presets:ex.sets.map(z=>({weight:z.weight,reps:z.reps})),needsSetup:false}))};
+ validate(candidate);
+ state.active=candidate.active;
+ if(saveTemplate)state.templates[current.templateIndex]=candidate.templates[current.templateIndex];
+ return state;
+}
 export function duplicateSessionDraft(state,index,id){const source=state.templates[index];if(!source)throw Error('Session not found');if(state.templates.length>=50)throw Error('Maximum 50 sessions');const draft=clone(source);draft.id=id;draft.enabled=true;draft.example=false;let n=1;do{const suffix=n===1?' (copy)':` (copy ${n})`;draft.name=source.name.slice(0,100-suffix.length)+suffix;n++;}while(state.templates.some(t=>t.name===draft.name));return draft;}
 export const phaseName=phase=>phase==='Mid'?'Medium':phase??'No tag';
 export const sessionPhase=(state,template)=>Object.hasOwn(template,'phase')?template.phase:state.programme?.mode==='manual'?null:cycle(state).phase;
