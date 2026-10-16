@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.9.0 exercise library and history
+
+Training has Programme / Exercises views. Exercises defaults to a compact no-image list of actually logged exercises ordered by latest recorded session, with live search, latest logged weight/reps and unique workout count. All my exercises also includes programme-only exercises clearly labelled as having no logged history. Exercise details show actual latest sets, heaviest logged load and newest-first session/set tables, with All / Heavy / Medium / Light / No tag filters. A Workout button opens the full historical record; Back returns to the exercise details and selected range.
+
+Programme and today's editors offer Choose from library and library-backed Replace. Search updates just the result list without replacing the focused input. Picker Back preserves the draft. A name-only custom exercise form creates an editable draft exercise. Adding/replacing does not save until the existing session-editor save action. Today's replacements confirm removal of logged sets, retain target group membership, and create unlogged sets; matching-range actual previous sets prefill when available. Source group membership is not copied when adding. Earlier history remains unchanged; the existing explicit today-only versus future-programme choices still apply. The service worker includes the new exercises.js module.
+
+Validation: all 66 tests passed. New logic checks cover honest empty history, unique workout counts, exclusion of unlogged drafts, chronological/range filtering, real heaviest loads, renamed/deleted exercise discovery, alias search, independent reuse of IDs/presets/increments, correct target groups, no copied logged flags and matching-range prefills. An actual-handler VM flow checks library/search escaping, live search, range detail, full-workout/back navigation, picker cancellation and preservation of draft edits, template replacement, logged-replacement confirmation, today-only saving and custom creation. Existing group/editor tests passed, and app/service-worker syntax passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.8.0 supersets and giant sets
 
 Programme and today's-workout editors now include an expandable Supersets & giant sets panel. Select any two exercises (including non-adjacent rows) and Group selected for a superset; three or more form a giant set. Ungroup selected removes chosen memberships; Ungroup removes an entire group. Exercise order stays unchanged, singleton remnants are cleared on save, and draft changes require the editor's existing save action. Replacing today's exercise keeps its group membership.

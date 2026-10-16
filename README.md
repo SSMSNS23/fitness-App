@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Exercise library and history v0.9.0
+
+Training → Exercises lists actually logged exercises by recency, with live search, latest logged sets and session counts. All my exercises includes clearly labelled programme-only entries. Exercise details show range-filtered session tables, latest sets and actual heaviest loads; each entry links back to the full workout. Session editors can add/replace from this library or create a named custom exercise. Picker changes remain drafts until the session editor is saved; existing today-only/programme choices are retained. All 66 automated checks pass; iPhone appearance still needs confirmation.
+
 ## Supersets and giant sets v0.8.0
 
 Session editors and Edit today's workout have a Supersets & giant sets panel. Select any two exercises for a superset or three or more for a giant set; non-adjacent selections and ungrouping are supported. Save the editor to apply changes. Imported group markers are recognised. Labels remain visible in programme previews, running workouts, summaries and historical snapshots. Rest starts after the full grouped round; exercise navigation stays manual. All 59 automated checks pass; latest iPhone appearance still needs confirmation.
@@ -79,4 +83,4 @@ With a recent Node.js version, run the tests from the repository root:
 
 ## Deferred
 
-Nutrition, Weight, drag handles, exercise-library discovery, full progress analytics, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
+Nutrition, Weight, drag handles, illustrated discovery beyond your own exercises, full progress analytics, accounts and cloud sync. The original full specification is preserved in the supplied handoff package.
