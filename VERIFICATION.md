@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.10.0 training progress
+
+Training has Programme / Exercises / Progress views. Progress provides 4-week, 12-week and all-time filters, plus All / Heavy / Medium / Light / No tag ranges. Summary totals count finished workouts with actual logged sets, logged sets, reps and lifting volume (sum of recorded load × reps). Unlogged sets and active workouts are excluded. Date windows use local calendar days and exclude future starts.
+
+Choose any previously logged exercise for a date-spaced SVG chart of its highest actual load per workout, with exact values in the newest-first list below. Single-point and zero-load histories render without invented points; no matching data has an explicit empty state. Global kg/lb changes chart, records and volume display. New load records require earlier actual logged sets and compare against earlier records outside the selected window too; historical corrections recalculate results. Workout links open the full record and Back returns to Progress retaining filters. This is the first progress slice; no estimated strength index is introduced.
+
+Validation: all 73 tests passed. Six new logic checks cover empty data, local date boundaries/future/active exclusions, exact sets/reps/volume arithmetic and date points, all range filters, record comparisons outside the date window and correction recalculation, renamed identities and read-only analytics. An actual-handler VM test checks rendered chart/list, escaped names, range/date/exercise controls, kg/lb conversion, no-data and zero-load rendering, and workout/back navigation with preserved filters. App and service worker syntax passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.9.0 exercise library and history
 
 Training has Programme / Exercises views. Exercises defaults to a compact no-image list of actually logged exercises ordered by latest recorded session, with live search, latest logged weight/reps and unique workout count. All my exercises also includes programme-only exercises clearly labelled as having no logged history. Exercise details show actual latest sets, heaviest logged load and newest-first session/set tables, with All / Heavy / Medium / Light / No tag filters. A Workout button opens the full historical record; Back returns to the exercise details and selected range.

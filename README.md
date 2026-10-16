@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Training progress v0.10.0
+
+Training → Progress shows logged workout/set/rep totals, lifting volume, date-spaced per-exercise load charts and actual new load records. Use 4-week, 12-week or all-time periods and range filters. Charts and totals respect global kg/lb. Workout links return to Progress with filters preserved. Unlogged sets and active workouts are excluded; records require earlier actual data and recalculate after corrections. All 73 automated checks pass; latest iPhone appearance still needs confirmation. Programme-wide strength indexing remains a later enhancement.
+
 ## Exercise library and history v0.9.0
 
 Training → Exercises lists actually logged exercises by recency, with live search, latest logged sets and session counts. All my exercises includes clearly labelled programme-only entries. Exercise details show range-filtered session tables, latest sets and actual heaviest loads; each entry links back to the full workout. Session editors can add/replace from this library or create a named custom exercise. Picker changes remain drafts until the session editor is saved; existing today-only/programme choices are retained. All 66 automated checks pass; iPhone appearance still needs confirmation.
