@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.16.0 training block home screen
+
+Replaced the six-slot rotation strip and Training structure control with a three-range vertical indicator, current round and current-round completion bar. The programme checklist exposes completion, next, remaining, paused and in-progress status. The hero resumes the actual running workout even when another session was selected. Selecting another session offers Back to next workout. Configuration is grouped in a closed Manage programme section; session Edit/Delete remain visible.
+
+Existing automatic cycles continue at their saved step/completion. Programmes with fixed or individual session ranges offer an explicit Use training blocks action that applies the automatic sequence to future templates while retaining original history and exercise defaults. Applying progression is blocked during active workouts; reapplying automatic blocks preserves existing round progress. Two rounds advance to the next range; repeated sessions do not falsely complete a round. Counts are labelled per round, avoiding a claim that the block contains a fixed number of workouts when sessions can be added/deleted.
+
+Validation: all 100 tests pass, including three new tests covering conversion/history preservation, active-workout protection and actual UI/action flows through two rounds, repeats, next selection and resume. App/model/service-worker syntax and stylesheet parsing pass. Offline/visible version v0.16.0. Browser/iPhone appearance remains unverified here.
+
 ## v0.15.0 simpler session editing and deletion
 
 Removed Starting reps, Starting weight and Weight step from the programme exercise editor. Snapshotting now changes only name/set count, preserving previous defaults and increments and truncating per-set presets only when reducing sets. Current-workout editing and historical correction retain actual weight/rep controls.

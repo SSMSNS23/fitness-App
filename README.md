@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Training block home screen v0.16.0
+
+Training now opens with a vertical Heavy → Medium → Light indicator, the current round (1 or 2), and completed/remaining sessions for that round. Start next workout or Resume is prominent; a checklist marks Completed, Next, Remaining, Paused and In progress. Edit/Delete remain beside sessions. Add, duplicate, order and progression controls sit inside Manage programme. Existing programmes using individual ranges have a Use training blocks action to switch future sessions together; historical ranges are preserved. Progress advances after completed sessions, never elapsed calendar time. All 100 automated checks pass; phone layout still needs review.
+
 ## Simpler session editing and deletion v0.15.0
 
 Programme exercises now need only a name and set count. Existing weight/rep defaults, per-set presets and increments stay available for workout prefilling; weights and reps are adjusted while training. Each Training session row has an explicit Delete action with confirmation, preserving completed workout history and its filters. Finish a running workout before deleting, and retain at least one active session. The Heavy/Medium/Light home-screen redesign is still being discussed.
