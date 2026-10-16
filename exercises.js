@@ -8,7 +8,7 @@ export function exerciseStats(records){const sets=records.flatMap(r=>r.exercises
 export function exerciseCatalogue(state){
  const entries=[];
  const add=(exercise,inProgramme=false)=>{let entry=entries.find(e=>matches(e.exercise,exercise));if(!entry){entry={exercise:clone(exercise),inProgramme,index:entries.length};entries.push(entry);}else if(inProgramme)entry.inProgramme=true;};
- state.templates.forEach(t=>t.exercises.forEach(ex=>add(ex,true)));
+ state.templates.filter(t=>!t.deleted).forEach(t=>t.exercises.forEach(ex=>add(ex,true)));
  [...state.history].sort((a,b)=>b.started-a.started).forEach(w=>w.exercises.filter(ex=>ex.sets.some(z=>z.done)).forEach(ex=>add(ex)));
  for(const entry of entries){entry.records=exerciseRecords(state,entry.exercise);entry.stats=exerciseStats(entry.records);}
  return entries.sort((a,b)=>(b.stats.latest?.workout.started??-1)-(a.stats.latest?.workout.started??-1)||a.exercise.name.localeCompare(b.exercise.name,'en-AU'));

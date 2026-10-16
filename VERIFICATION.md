@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.15.0 simpler session editing and deletion
+
+Removed Starting reps, Starting weight and Weight step from the programme exercise editor. Snapshotting now changes only name/set count, preserving previous defaults and increments and truncating per-set presets only when reducing sets. Current-workout editing and historical correction retain actual weight/rep controls.
+
+Added confirmed Delete actions on Training session rows. Deleted templates are marked deleted and disabled internally, keeping indices stable for historical records. Training, sequencing, reordering and programme-only exercise catalogue entries exclude deleted sessions; history remains readable/filterable. Deleted sessions do not count towards the 50-session programme limit. Start, duplicate, pause and stale editor saves cannot revive deleted sessions. Deletion is blocked during a running workout and for the last enabled session. Removing the final unfinished session advances a fully completed automatic rotation once.
+
+Validation: all 97 automated checks pass, including new deletion/history/backup/reorder/capacity/rotation boundary tests and an actual editor/delete flow covering cancellation, hidden default preservation and stale-editor rejection. App, model, store and service-worker syntax plus stylesheet parsing pass. Offline and visible version are v0.15.0. Browser/iPhone layout has not been visually verified. Home-screen range/block redesign is deferred for discussion.
+
 ## v0.14.2 clearer workout records
 
 History cards now display logged/planned sets and duration in aligned columns, with an explicit unlogged-set notice. A shared read-only overview presents date, range, logged/planned count, duration and incomplete or complete status in both the saved summary and history detail. Auto-finished workouts retain the last-interaction explanation. Next-session information has its own compact card after saving; workout set tables, grouping and correction controls are retained.

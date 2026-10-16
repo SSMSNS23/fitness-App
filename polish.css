@@ -136,3 +136,4 @@ h2{font-size:18px;font-weight:700;letter-spacing:-.35px}h3{font-weight:650;line-
 .workout-metrics strong>span{font-size:16px;font-weight:500;color:var(--muted)}
 .metric-label{font-size:11px;color:var(--muted)}
 .workout-status>.rest-bar{border:0;border-top:1px solid var(--border);border-radius:0;padding:10px 0 0;margin:12px 0 0;background:transparent}
+.session-row-actions{display:flex;flex-direction:column;gap:4px;flex-shrink:0}.session-row-actions .ghost{min-width:62px;min-height:44px;padding:8px 10px;font-size:12px}

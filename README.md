@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Simpler session editing and deletion v0.15.0
+
+Programme exercises now need only a name and set count. Existing weight/rep defaults, per-set presets and increments stay available for workout prefilling; weights and reps are adjusted while training. Each Training session row has an explicit Delete action with confirmation, preserving completed workout history and its filters. Finish a running workout before deleting, and retain at least one active session. The Heavy/Medium/Light home-screen redesign is still being discussed.
+
 ## Clearer workout records v0.14.2
 
 History cards align logged/planned sets and duration in two columns, with unlogged sets visible in the list. Saved summaries and reopened workouts use the same date, range and metrics card. The next session has a separate compact panel after saving. Existing set tables, group containers, history correction and finish review remain available. All 91 automated checks pass; iPhone visual review remains outstanding.
