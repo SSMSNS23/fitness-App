@@ -1,5 +1,15 @@
 # Verification — 16 October 2026
 
+## v0.18.0 compact editor and visual makeover
+
+Rebuilt future-session exercise cards as a name/set-count grid and one compact grip/arrows/Replace/Remove toolbar. Name/set fields retain their existing form keys, set constraints, default preservation and action indices. Session name/range controls are grouped, range options collapse, helper copy is shortened, and a sticky Save bar sits above navigation (with extra offset when the active-workout resume strip is present). Historical correction retains weight, rep and logged-set controls. Existing drag and grouping actions remain available.
+
+Refreshed dark ink and warm cream surfaces, tighter radii/spacing, selected-session accent edges, amber field focus, green complete states, muted blue grouped-exercise accents, clearer block labels and quieter secondary actions. Training, active logging, history and navigation share this treatment. Numeric logging controls retain large text and tap targets. Compact editor inputs are 44px minimum with 16px name text; toolbar targets are at least 44px. No one-third height reduction or browser-measured layout claim is made.
+
+Found and fixed the Save today & program action mismatch introduced by the earlier visible-wording change: the handler now accepts the rendered program value and the earlier programme value. A regression test extracts the real rendered button value and verifies both active-workout and future-template updates, with historical data untouched.
+
+Validation: all 110 automated checks pass, covering compact editor save/reorder/picker/group flows and the new actual-button regression. App/service-worker syntax and stylesheet parsing passed. Key colour contrast: dark secondary 6.40:1, light secondary 5.06:1, group accents 9.59:1/6.69:1, Save text 8.45:1/5.63:1. Cache/visible version v0.18.0. Browser/iPhone visual layout, sticky positioning and viewport overflow remain unverified here.
+
 ## v0.17.0 reversible blocks and configurable progression
 
 Added Change current block at the top of Training, offering each configured range/round, and a persistent single-step Undo last change for new block/progression changes. Undo restores previous mode, current step, completion, next session and individual session ranges without changing history or exercise data. Undo requires an unchanged program structure/progression/history record list and no active workout. An earlier block can still be chosen explicitly after undo becomes unavailable. Existing v0.16 changes have no retroactive undo snapshot.

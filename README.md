@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Compact design refresh v0.18.0
+
+Program editing uses compact exercise-name/set-count rows with a single grip/arrow/Replace/Remove toolbar. Session range options are collapsible and Save stays within reach above navigation. Refreshed ink/cream surfaces, amber selection/focus, blue group accents, green completion, tighter cards and clearer typography carry through Training, logging, history and navigation. Controls retain at least 44px touch targets and editable text remains at least 16px. Also fixed the rendered Save today & program button so it updates future templates as well as today's workout. All 110 checks pass; actual iPhone appearance still needs review.
+
 ## Flexible range progression v0.17.0
 
 Change current block can move to any configured range/round. Undo last change restores the most recent block setup while no workout or conflicting program change has occurred. Manage program now edits the order of Heavy/Medium/Light and one or two rounds for each range. Existing round progress is retained when saving a sequence where possible, and completed-session progression remains independent of calendar dates. Visible app wording uses Program. All 109 automated checks pass; phone layout still needs review.
