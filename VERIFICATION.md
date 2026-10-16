@@ -1,5 +1,11 @@
 # Verification — 16 October 2026
 
+## v0.6.2 duplicate session
+
+Training now offers Duplicate session beside Edit name & tag. It opens an unsaved draft with a unique copy name, a new session ID and independent cloned exercises, preserving range tag/default inheritance, per-set presets and increments. Exercise IDs remain shared because these are the same exercises, supporting existing performance references. A paused source produces an enabled copy. Save appends and selects the new session; Cancel leaves state untouched. History and the active workout are not copied or modified. The existing 50-session limit is enforced before opening and on save.
+
+Validation: all 45 model tests passed. Actual application action/snapshot/submit handlers passed duplicate → cancel unchanged → duplicate again → rename/retag → save → select copy → backup restore, with the source unchanged and no added history. App syntax passed. Browser/iPhone visual QA remains unverified for this release.
+
 ## v0.6.0 session names and training tags
 
 v0.6.1 discoverability: confirmed the public v0.6.0 app.js contained the tag selector and manual structure option. Added Edit name & tag immediately under the selected session name, moved Training structure above the programme session list, and made the editor label explicitly name Heavy / Medium / Light. The existing actual-handler VM check passed again, with additional checks that the shortcut opens the editor and the structure form precedes the session list. App syntax passed. No data schema or training behaviour changed. Browser/iPhone visual confirmation remains outstanding.

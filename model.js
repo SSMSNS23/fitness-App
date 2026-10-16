@@ -2,6 +2,7 @@ import {clone,validate} from './store.js';
 export const matches=(a,b)=>(a.id&&a.id===b.id)||a.name===b.name;
 export const enabledIndices=state=>state.templates.flatMap((t,i)=>t.enabled===false?[]:[i]);
 export const PHASES=['Heavy','Mid','Light'];
+export function duplicateSessionDraft(state,index,id){const source=state.templates[index];if(!source)throw Error('Session not found');if(state.templates.length>=50)throw Error('Maximum 50 sessions');const draft=clone(source);draft.id=id;draft.enabled=true;draft.example=false;let n=1;do{const suffix=n===1?' (copy)':` (copy ${n})`;draft.name=source.name.slice(0,100-suffix.length)+suffix;n++;}while(state.templates.some(t=>t.name===draft.name));return draft;}
 export const phaseName=phase=>phase==='Mid'?'Medium':phase??'No tag';
 export const sessionPhase=(state,template)=>Object.hasOwn(template,'phase')?template.phase:state.programme?.mode==='manual'?null:cycle(state).phase;
 export function setProgrammeMode(state,mode){if(!['auto','manual'].includes(mode))throw Error('Invalid programme mode');if(state.active)throw Error('Finish your workout before changing the rotation');if((state.programme?.mode??'auto')===mode)return state;state.programme={step:state.programme?.step??0,completed:[],mode};return state;}
