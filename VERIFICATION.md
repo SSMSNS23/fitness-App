@@ -1,5 +1,11 @@
 # Verification — 16 October 2026
 
+## v0.14.2 clearer workout records
+
+History cards now display logged/planned sets and duration in aligned columns, with an explicit unlogged-set notice. A shared read-only overview presents date, range, logged/planned count, duration and incomplete or complete status in both the saved summary and history detail. Auto-finished workouts retain the last-interaction explanation. Next-session information has its own compact card after saving; workout set tables, grouping and correction controls are retained.
+
+Validation: all 91 existing checks pass, covering actual finish/summary, history navigation, correction and grouped-workout flows as well as model/persistence invariants. App/service-worker syntax and stylesheet parsing passed. Cache and visible version are v0.14.2. No browser or iPhone visual verification is claimed; narrow-screen spacing needs a phone check.
+
 ## v0.14.1 compact workout status
 
 Combined range, local-save status, logged/planned set count, elapsed time, progress bar and optional rest timer into one workout card. Set and time values use aligned two-column metrics; rest reset retains its action and timer data attributes. The editing toolbar reads Edit workout with its full accessible label. Save-status hooks and all logging actions remain unchanged.

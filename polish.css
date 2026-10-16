@@ -77,7 +77,10 @@ h2{font-size:18px;font-weight:700;letter-spacing:-.35px}h3{font-weight:650;line-
 .exercise-visibility{gap:6px}.exercise-visibility .ghost{font-size:11px;padding:10px 5px;background:transparent}
 .endcard{margin-top:28px;background:transparent;box-shadow:none}.endcard .goldbtn{background:transparent;color:var(--gold);border:1px solid var(--gold)}
 .history-entry{padding:18px 16px;border-radius:15px;margin:11px 0}.history-name{font-size:18px;font-weight:650;letter-spacing:-.3px}.history-main{gap:13px}
-.history-metrics{font-size:12px;gap:12px 22px}.history-metrics strong{font-size:17px;font-weight:650}.history-chevron{font-size:25px;color:var(--muted)}
+.history-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));font-size:11px;gap:12px 16px}.history-metrics>span{display:flex;flex-direction:column;gap:3px;min-width:0}.history-metrics strong{font-size:20px;font-weight:650;line-height:1.25;margin:0}.history-metrics .metric-denominator{font-size:13px;font-weight:500;color:var(--muted)}.history-chevron{font-size:25px;color:var(--muted)}
+.history-unlogged{font-size:12px;color:var(--gold);border-top:1px solid var(--border);padding-top:10px}
+.record-overview .workout-metrics{margin-top:18px}.record-overview .unlogged-notice{margin:16px 0 0}.record-complete{font-size:12px;color:var(--muted);margin:16px 0 0;padding-top:12px;border-top:1px solid var(--border)}
+.saved-next{background:var(--amber-tint);box-shadow:none}.saved-next h2{margin:7px 0 0}.saved-next .success{margin-bottom:0}.record-sets>h2{margin-bottom:4px}.record-sets>.row>h2{margin:0}
 .history-top .pill{color:var(--gold);border-color:var(--border)}
 .field>span{font-size:12px;font-weight:600;color:var(--muted)}.field input,.field select{border-radius:11px;min-height:50px}
 .editor-row{border-radius:16px;margin:15px 0}.editor-fields{gap:12px}.editor-actions .ghost{font-size:12px}

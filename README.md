@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Clearer workout records v0.14.2
+
+History cards align logged/planned sets and duration in two columns, with unlogged sets visible in the list. Saved summaries and reopened workouts use the same date, range and metrics card. The next session has a separate compact panel after saving. Existing set tables, group containers, history correction and finish review remain available. All 91 automated checks pass; iPhone visual review remains outstanding.
+
 ## Compact workout status v0.14.1
 
 Workout range, save status, set progress, elapsed time and the optional rest timer now share one compact card. The editing toolbar has a shorter visible label while retaining its full accessible name. All 91 automated checks pass; iPhone visual review remains outstanding.
