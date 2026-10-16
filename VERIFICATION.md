@@ -1,5 +1,13 @@
 # Verification — 16 October 2026
 
+## v0.13.0 visual refinement
+
+Introduced a separate polish.css layer for consistent deep-slate/amber dark mode and warm off-white light mode, system typography, quieter secondary controls, consistent radii and spacing, segmented Training tabs and a less prominent bottom navigation. The selected workout now has a range badge, clear exercise/set counts and Start as its primary action, with edit/duplicate controls below the exercise preview. Training structure is an expandable section with its current mode visible. Session rows have ordered number markers and grouped add/reorder controls. Existing data actions and save behaviour are retained.
+
+Active logging retains the large 56px number controls and Log buttons. Previous performance is separated into a slate reference panel; completed states remain green and finishing uses a restrained amber outline. History, editing controls, tables and other screens inherit the visual system. New styles are cached offline, and the browser theme colour matches the palette.
+
+Validation: all existing 89 checks passed after markup changes, plus app/service-worker syntax. The new stylesheet parsed without errors, including responsive rules. Verified stylesheet ordering and offline-cache inclusion. Key contrast checks: dark text 14.16:1, secondary 6.66:1, amber 8.56:1 and primary button 5.47:1; light main text 13.95:1, amber 5.63:1 and primary button 6.56:1. Light secondary text was adjusted to reach 4.72:1 on the slate reference panel. No browser preview/control capability was available, so visual appearance, viewport overflow and spacing still need an iPhone check; no screenshot verification is claimed.
+
 ## v0.12.0 drag to reorder exercises
 
 Programme and today's-workout editors have a Move grip on each exercise, retaining the existing up/down buttons. Pointer dragging snapshots current form values, shows a source and insertion marker, scrolls near viewport edges, and moves the complete exercise object only on release. Draft changes still require Save. A small movement threshold prevents taps from moving/scolling. Pointer cancellation, lost capture, Escape, focus loss, hidden documents and replaced editor DOM cancel safely. No drag handles appear in historical correction or active logging screens. Only the handle disables native touch scrolling.

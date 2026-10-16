@@ -1,5 +1,9 @@
 # Personal Training Log
 
+## Visual refinement v0.13.0
+
+A restrained slate/amber visual system with a warm light theme, clearer Start action, ordered session rows, compact expandable training structure, segmented views and distinct previous-performance panels. Large logging controls and all saved-data behaviour are retained. The separate polish.css layer is cached offline. All 89 existing checks pass, plus stylesheet parsing and key contrast checks. Actual visual spacing and viewport layout still need an iPhone review.
+
 ## Exercise drag handles v0.12.0
 
 Programme and today's-workout editors offer a Move grip for pointer/touch reordering, including drop indicators and edge scrolling. Arrow buttons remain available. Dragging changes only the edit draft; Save applies it. Complete exercise data, groups and logged sets move together. Historical correction and active logging have no drag handles. All 89 automated checks pass; the new touch gesture still requires an iPhone check.
